@@ -51,22 +51,6 @@ function App() {
       <br />
       <br />
       <br />
-      {/* <TaskList
-        name='Personal'
-        id='mone'
-        Z
-        deleteList={deleteList}
-      />
-      <TaskList
-        name='Hola'
-        id='mone2'
-        deleteList={deleteList}
-      />
-      <TaskList
-        name='Hola'
-        id='mone3'
-        deleteList={deleteList}
-      /> */}
       {taskList.map(taskList => (
         <TaskList
           name={taskList.name}
