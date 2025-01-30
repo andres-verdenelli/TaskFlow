@@ -31,12 +31,21 @@ function App() {
   return (
     <>
       <h1>To do List</h1>
-      <button onClick={createList}>Create new List</button>
+      <button
+        id='createNewListButton'
+        onClick={createList}
+      >
+        Create new List
+      </button>
       <input
         type='text'
         name=''
         id='inputTextListName'
         placeholder='Insert List Name'
+        onKeyDown={e => {
+          if (e.code === 'Enter')
+            document.getElementById('createNewListButton').click()
+        }}
       />
       <br />
       <br />

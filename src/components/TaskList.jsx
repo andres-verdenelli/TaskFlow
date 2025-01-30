@@ -1,5 +1,6 @@
 import Task from './Task'
 import { useEffect, useState } from 'react'
+import styles from '../styles/TaskList.module.css'
 
 export default function TaskList({ name, id, deleteList }) {
   const storageName = `tasklist${id}`
@@ -34,7 +35,7 @@ export default function TaskList({ name, id, deleteList }) {
   }
   return (
     <>
-      <span>{name}</span>
+      <span className={styles.title}>{name}</span>
       <button onClick={createTask}>Create a task</button>
       <button onClick={() => deleteList(id)}>Delete List</button>
       <ul>
