@@ -1,50 +1,71 @@
-import Task from './components/Task'
-import './App.css'
 import { useEffect, useState } from 'react'
+import './App.css'
+import TaskList from './components/TaskList'
 
 function App() {
   const [taskList, setTaskList] = useState(() => {
-    const storedTasks = localStorage.getItem('taskList')
-    return storedTasks ? JSON.parse(storedTasks) : []
+    const taskList = localStorage.getItem('taskList')
+    return taskList ? JSON.parse(taskList) : []
   })
 
   useEffect(() => {
     localStorage.setItem('taskList', JSON.stringify(taskList))
   }, [taskList])
 
-  const createTask = () => {
-    const task = {
-      text: '',
-      isChecked: false,
-      date: Date.now(),
+  const createList = () => {
+    const taskListName = document.getElementById('inputTextListName').value
+    const newTaskList = {
+      name: taskListName,
+      id: crypto.randomUUID(),
     }
-    setTaskList([...taskList, task])
+    if (taskListName !== '') {
+      setTaskList([...taskList, newTaskList])
+      document.getElementById('inputTextListName').value = ''
+    }
   }
 
-  const updateTask = updatedTask => {
-    setTaskList(
-      taskList.map(task =>
-        task.date === updatedTask.date ? updatedTask : task
-      )
-    )
+  const deleteList = id => {
+    setTaskList(taskList.filter(taskList => taskList.id !== id))
   }
 
   return (
     <>
       <h1>To do List</h1>
-      <h3>Personal</h3>
-      <button onClick={createTask}>Create a task</button>
-      <ul>
-        {taskList.map(task => (
-          <Task
-            text={task.text}
-            isChecked={task.isChecked}
-            key={task.date}
-            date={task.date}
-            updateTask={updateTask}
-          />
-        ))}
-      </ul>
+      <button onClick={createList}>Create new List</button>
+      <input
+        type='text'
+        name=''
+        id='inputTextListName'
+        placeholder='Insert List Name'
+      />
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* <TaskList
+        name='Personal'
+        id='mone'
+        Z
+        deleteList={deleteList}
+      />
+      <TaskList
+        name='Hola'
+        id='mone2'
+        deleteList={deleteList}
+      />
+      <TaskList
+        name='Hola'
+        id='mone3'
+        deleteList={deleteList}
+      /> */}
+      {taskList.map(taskList => (
+        <TaskList
+          name={taskList.name}
+          id={taskList.id}
+          key={taskList.id}
+          deleteList={deleteList}
+        />
+      ))}
     </>
   )
 }

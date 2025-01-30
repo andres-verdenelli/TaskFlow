@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
 
-export default function Task(props) {
-  const [isChecked, setIsChecked] = useState(props.isChecked)
-  const [text, setText] = useState(props.text)
+export default function Task({
+  text: initialText,
+  isChecked: initialCheckeStatus,
+  date,
+  deleteTask,
+  updateTask,
+}) {
+  const [isChecked, setIsChecked] = useState(initialCheckeStatus)
+  const [text, setText] = useState(initialText)
 
   useEffect(() => {
-    props.updateTask({ text, isChecked, date: props.date })
+    updateTask({ text, isChecked, date: date })
   }, [text, isChecked])
   return (
     <li>
@@ -23,7 +29,7 @@ export default function Task(props) {
         value={text}
         onChange={e => setText(e.target.value)}
       ></input>
-      <button onClick={() => console.log(props)}>Info</button>
+      <button onClick={() => deleteTask({ date })}>Delete</button>
     </li>
   )
 }
