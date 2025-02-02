@@ -1,0 +1,17 @@
+.header {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  border-bottom: 1px solid black;
+}
+
+.contentContainer {
+  display: flex;
+}
+.sideBarContainer {
+  border-right: 1px solid black;
+  padding: 1rem;
+}
+
+.mainContentContainer {
+  padding: 1rem;
+}

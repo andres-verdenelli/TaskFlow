@@ -1,18 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function Task({
   text: initialText,
   isChecked: initialCheckeStatus,
   date,
-  deleteTask,
-  updateTask,
 }) {
   const [isChecked, setIsChecked] = useState(initialCheckeStatus)
   const [text, setText] = useState(initialText)
-
-  useEffect(() => {
-    updateTask({ text, isChecked, date: date })
-  }, [text, isChecked])
   return (
     <li>
       <input
@@ -20,7 +14,6 @@ export default function Task({
         name=''
         id=''
         checked={isChecked}
-        onChange={e => setIsChecked(e.target.checked)}
       />
       <input
         type='text'
