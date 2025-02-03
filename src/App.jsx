@@ -29,10 +29,22 @@ function App() {
     setTasks([...tasks, newTask])
   }
 
-  const deleteTask = newTask => {
-    const newTasks = tasks.filter(task => {
-      return task.id !== newTask.id
-    })
+  const deleteTask = id => {
+    const newTasks = tasks.filter(task => task.id !== id)
+    setTasks(newTasks)
+  }
+
+  const renameTask = (id, newName) => {
+    const newTasks = tasks.map(task =>
+      task.id === id ? { ...task, name: newName } : task
+    )
+    setTasks(newTasks)
+  }
+
+  const checkTask = id => {
+    const newTasks = tasks.map(task =>
+      task.id === id ? { ...task, isDone: !task.isDone } : task
+    )
     setTasks(newTasks)
   }
 
@@ -64,6 +76,8 @@ function App() {
                 task={task}
                 key={task.id}
                 deleteTask={deleteTask}
+                renameTask={renameTask}
+                checkTask={checkTask}
               />
             ))}
           </List>
