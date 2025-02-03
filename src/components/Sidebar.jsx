@@ -6,6 +6,8 @@ import ListItemText from '@mui/material/ListItemText'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SettingsIcon from '@mui/icons-material/Settings'
+import AddIcon from '@mui/icons-material/Add'
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 
 export default function Sidebar({
   createTaskList,
@@ -22,6 +24,8 @@ export default function Sidebar({
             if (userInput) createTaskList(userInput)
           }}
           variant='contained'
+          size='small'
+          endIcon={<PlaylistAddIcon />}
         >
           Create new list
         </Button>
@@ -30,7 +34,7 @@ export default function Sidebar({
           component='nav'
           arial-label='secondary mailbox folder'
         >
-          {taskList.map(taskList => (
+          {/* {taskList.map(taskList => (
             <ListItemButton
               key={taskList.id}
               selected={taskList.isSelected}
@@ -44,11 +48,11 @@ export default function Sidebar({
                 }}
                 edge='end'
               >
-                {/* <SettingsIcon /> */}
+                <SettingsIcon />
                 <DeleteIcon />
               </IconButton>
             </ListItemButton>
-          ))}
+          ))} */}
         </List>
       </Box>
     </>

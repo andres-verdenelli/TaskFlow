@@ -1,28 +1,29 @@
 import { useState } from 'react'
+import ListItem from '@mui/material/ListItem'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import TextField from '@mui/material/TextField'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
 
-export default function Task({
-  text: initialText,
-  isChecked: initialCheckeStatus,
-  date,
-}) {
-  const [isChecked, setIsChecked] = useState(initialCheckeStatus)
-  const [text, setText] = useState(initialText)
+export default function Task({ task, deleteTask }) {
+  const [name, setName] = useState(task.name)
+  const [isDone, setIsDone] = useState(task.isDone)
+
   return (
-    <li>
-      <input
-        type='checkbox'
-        name=''
-        id=''
-        checked={isChecked}
+    <ListItem>
+      <Checkbox
+        checked={isDone}
+        onChange={() => setIsDone(!isDone)}
       />
-      <input
-        type='text'
-        name=''
-        id=''
-        value={text}
-        onChange={e => setText(e.target.value)}
-      ></input>
-      <button onClick={() => deleteTask({ date })}>Delete</button>
-    </li>
+      <TextField
+        variant='standard'
+        value={name}
+        onChange={e => setName(e.target.value)}
+      ></TextField>
+      <IconButton onClick={() => deleteTask(task)}>
+        <DeleteIcon />
+      </IconButton>
+    </ListItem>
   )
 }
