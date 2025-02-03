@@ -3,56 +3,85 @@ import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import IconButton from '@mui/material/IconButton'
-import DeleteIcon from '@mui/icons-material/Delete'
-import SettingsIcon from '@mui/icons-material/Settings'
-import AddIcon from '@mui/icons-material/Add'
+import ListItemIcon from '@mui/material/ListItemIcon'
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
+import TodayIcon from '@mui/icons-material/Today'
+import ScheduleIcon from '@mui/icons-material/Schedule'
+import GridViewIcon from '@mui/icons-material/GridView'
+import TaskAltIcon from '@mui/icons-material/TaskAlt'
+import AddIcon from '@mui/icons-material/Add'
 
-export default function Sidebar({
-  createTaskList,
-  deleteTaskList,
-  taskList,
-  selectTaskList,
-}) {
+import Divider from '@mui/material/Divider'
+
+import { useState } from 'react'
+import CircleIcon from '@mui/icons-material/Circle'
+import IconButton from '@mui/material/IconButton'
+
+export default function Sidebar() {
+  const [selectedId, setSelectedIndex] = useState()
+
+  //  const handleSelectIndex =
   return (
     <>
-      <Box sx={{ width: '100%' }}>
-        <Button
-          onClick={() => {
-            const userInput = prompt('Please enter ToDo List Name:')
-            if (userInput) createTaskList(userInput)
-          }}
-          variant='contained'
-          size='small'
-          endIcon={<PlaylistAddIcon />}
-        >
-          Create new list
-        </Button>
-
-        <List
-          component='nav'
-          arial-label='secondary mailbox folder'
-        >
-          {/* {taskList.map(taskList => (
-            <ListItemButton
-              key={taskList.id}
-              selected={taskList.isSelected}
-              onClick={() => selectTaskList(taskList.id)}
-            >
-              <ListItemText key={taskList.id}>{taskList.name}</ListItemText>
-              <IconButton
-                onClick={e => {
-                  e.stopPropagation()
-                  deleteTaskList(taskList.id)
-                }}
-                edge='end'
-              >
-                <SettingsIcon />
-                <DeleteIcon />
-              </IconButton>
-            </ListItemButton>
-          ))} */}
+      <Box
+        sx={{ borderRight: '1px solid black' }}
+        p={2}
+      >
+        <List>
+          <ListItemButton>
+            <ListItemIcon>
+              <GridViewIcon />
+            </ListItemIcon>
+            <ListItemText>All</ListItemText>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <TodayIcon />
+            </ListItemIcon>
+            <ListItemText>Today</ListItemText>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <ScheduleIcon />
+            </ListItemIcon>
+            <ListItemText>Scheduled</ListItemText>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <TaskAltIcon />
+            </ListItemIcon>
+            <ListItemText>Done</ListItemText>
+          </ListItemButton>
+          <Divider>
+            <IconButton>
+              <AddIcon />
+            </IconButton>
+            <ListItemText></ListItemText>
+          </Divider>
+          <ListItemButton>
+            <ListItemIcon>
+              <CircleIcon color='secondary' />
+            </ListItemIcon>
+            <ListItemText>Personal</ListItemText>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <CircleIcon color='error' />
+            </ListItemIcon>
+            <ListItemText>Work</ListItemText>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <CircleIcon color='primary' />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItemButton>{' '}
+          <ListItemButton>
+            <ListItemIcon>
+              <CircleIcon color='warning' />
+            </ListItemIcon>
+            <ListItemText>Periodic</ListItemText>
+          </ListItemButton>
         </List>
       </Box>
     </>

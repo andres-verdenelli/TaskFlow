@@ -1,14 +1,12 @@
 import './App.css'
 import Sidebar from './components/Sidebar'
 import Task from './components/Task'
-import styles from './styles/App.module.css'
 import { useState, useEffect } from 'react'
-import Button from '@mui/material/Button'
-import AddIcon from '@mui/icons-material/Add'
 import List from '@mui/material/List'
 import Header from './components/Header'
+import { Box } from '@mui/material'
 
-function App() {
+export default function App() {
   const [tasks, setTasks] = useState(() => {
     const tasksLocalStorage = localStorage.getItem('tasks')
     return tasksLocalStorage ? JSON.parse(tasksLocalStorage) : []
@@ -56,35 +54,32 @@ function App() {
 
   return (
     <>
-      <Header />
-      <div className={styles.contentContainer}>
-        {/* <div className={styles.sideBarContainer}>
+      <Box
+        display={'flex'}
+        flexDirection={'column'}
+        height={'100vh'}
+      >
+        <Header handleCreateTask={handleCreateTask} />
+        <Box
+          display={'flex'}
+          flexGrow={1}
+        >
           <Sidebar />
-        </div> */}
-        <div className={styles.mainContentContainer}>
-          <Button
-            variant='outlined'
-            size='small'
-            onClick={handleCreateTask}
-            endIcon={<AddIcon />}
-          >
-            create task
-          </Button>
-          <List>
-            {tasks.map(task => (
-              <Task
-                task={task}
-                key={task.id}
-                deleteTask={deleteTask}
-                renameTask={renameTask}
-                checkTask={checkTask}
-              />
-            ))}
-          </List>
-        </div>
-      </div>
+          <Box flexGrow={1}>
+            <List>
+              {tasks.map(task => (
+                <Task
+                  task={task}
+                  key={task.id}
+                  deleteTask={deleteTask}
+                  renameTask={renameTask}
+                  checkTask={checkTask}
+                />
+              ))}
+            </List>
+          </Box>
+        </Box>
+      </Box>
     </>
   )
 }
-
-export default App

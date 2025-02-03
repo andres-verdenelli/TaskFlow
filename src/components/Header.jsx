@@ -6,21 +6,13 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import AddIcon from '@mui/icons-material/Add'
 
-export default function Header() {
+export default function Header({ handleCreateTask }) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant='h6'
             component='div'
@@ -28,7 +20,17 @@ export default function Header() {
           >
             To Do List App
           </Typography>
-          <Button color='inherit'>Login</Button>
+          <Button
+            variant='outlined'
+            sx={{
+              color: 'white',
+              borderColor: 'white',
+            }}
+            onClick={handleCreateTask}
+            endIcon={<AddIcon />}
+          >
+            create task
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

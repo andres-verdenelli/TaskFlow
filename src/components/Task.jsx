@@ -8,12 +8,13 @@ import IconButton from '@mui/material/IconButton'
 
 export default function Task({ task, deleteTask, renameTask, checkTask }) {
   return (
-    <ListItem>
+    <ListItem sx={{ display: 'flex', alignItems: 'center' }}>
       <Checkbox
         checked={task.isDone}
         onChange={() => checkTask(task.id)}
       />
       <TextField
+        sx={{ flexGrow: 1, mr: 2 }}
         variant='standard'
         value={task.name}
         onChange={e => renameTask(task.id, e.target.value)}
