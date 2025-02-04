@@ -15,12 +15,23 @@ export default function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
-  const createTask = name => {
+  const [lists, setLists] = useState(() => {
+    const listsLocalStorage = localStorage.getItem('lists')
+    return listsLocalStorage ? JSON.parse(listsLocalStorage) : []
+  })
+  useEffect(() => {
+    localStorage.setItem('lists', JSON.stringify(lists))
+  }, [lists])
+
+  const [selectedIndex, setSelectedIndex] = useState(1)
+
+  const createTask = (name, listId) => {
     return {
       name: name,
       id: crypto.randomUUID(),
       creationDate: Date.now(),
       isDone: false,
+      listId: listId,
     }
   }
   const addTask = newTask => {
@@ -52,6 +63,14 @@ export default function App() {
     addTask(newTask)
   }
 
+  const createList = (name, color) => {
+    return { name: name, id: crypto.randomUUID(), color: '' }
+  }
+
+  const addList = list => {
+    setLists([...lists, list])
+  }
+
   return (
     <>
       <Box
@@ -64,7 +83,13 @@ export default function App() {
           display={'flex'}
           flexGrow={1}
         >
-          <Sidebar />
+          <Sidebar
+            createList={createList}
+            addList={addList}
+            lists={lists}
+            setSelectedIndex={setSelectedIndex}
+            selectedIndex={selectedIndex}
+          />
           <Box flexGrow={1}>
             <List>
               {tasks.map(task => (
