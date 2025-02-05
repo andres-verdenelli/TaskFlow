@@ -23,10 +23,10 @@ import TaskList from './TaskList'
 
 export default function Sidebar({
   createList,
-  addList,
   lists,
-  setSelectedIndex,
-  selectedIndex,
+  currentView,
+  setCurrentView,
+  VIEW_TYPES,
 }) {
   const [open, setOpen] = useState(false)
   const [listName, setListName] = useState('')
@@ -39,8 +39,7 @@ export default function Sidebar({
   const handleClose = () => setOpen(false)
 
   const handleSubmit = () => {
-    const newList = createList(listName, 'grey')
-    addList(newList)
+    createList(listName) //implementar color
     setListName('')
     setOpen(false)
   }
@@ -53,8 +52,8 @@ export default function Sidebar({
       >
         <List>
           <ListItemButton
-            selected={selectedIndex === 1}
-            onClick={() => setSelectedIndex(1)}
+            selected={currentView.type === VIEW_TYPES.ALL}
+            onClick={() => setCurrentView({ type: VIEW_TYPES.ALL })}
           >
             <ListItemIcon>
               <GridViewIcon />
@@ -62,8 +61,8 @@ export default function Sidebar({
             <ListItemText>All</ListItemText>
           </ListItemButton>
           <ListItemButton
-            selected={selectedIndex === 2}
-            onClick={() => setSelectedIndex(2)}
+            selected={currentView.type === VIEW_TYPES.TODAY}
+            onClick={() => setCurrentView({ type: VIEW_TYPES.TODAY })}
           >
             <ListItemIcon>
               <TodayIcon />
@@ -71,8 +70,8 @@ export default function Sidebar({
             <ListItemText>Today</ListItemText>
           </ListItemButton>
           <ListItemButton
-            selected={selectedIndex === 3}
-            onClick={() => setSelectedIndex(3)}
+            selected={currentView.type === VIEW_TYPES.SCHEDULE}
+            onClick={() => setCurrentView({ type: VIEW_TYPES.SCHEDULE })}
           >
             <ListItemIcon>
               <ScheduleIcon />
@@ -80,8 +79,8 @@ export default function Sidebar({
             <ListItemText>Scheduled</ListItemText>
           </ListItemButton>
           <ListItemButton
-            selected={selectedIndex === 4}
-            onClick={() => setSelectedIndex(4)}
+            selected={currentView.type === VIEW_TYPES.DONE}
+            onClick={() => setCurrentView({ type: VIEW_TYPES.DONE })}
           >
             <ListItemIcon>
               <TaskAltIcon />
@@ -90,17 +89,21 @@ export default function Sidebar({
           </ListItemButton>
           <Divider>
             <IconButton onClick={() => handleOpen()}>
-              {/* <AddIcon /> */}
               <PlaylistAddIcon />
             </IconButton>
             <ListItemText></ListItemText>
           </Divider>
-          {lists.map((list, index) => (
+          {lists.map(list => (
             <TaskList
               key={list.id}
               name={list.name}
-              selected={selectedIndex === index + 5}
-              onClick={() => setSelectedIndex(index + 5)}
+              selected={
+                currentView.type === VIEW_TYPES.LIST &&
+                currentView.listId === list.id
+              }
+              onClick={() =>
+                setCurrentView({ type: VIEW_TYPES.LIST, listId: list.id })
+              }
             />
           ))}
           <Dialog

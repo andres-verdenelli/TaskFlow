@@ -1,74 +1,38 @@
 import './App.css'
 import Sidebar from './components/Sidebar'
 import Task from './components/Task'
-import { useState, useEffect } from 'react'
 import List from '@mui/material/List'
 import Header from './components/Header'
 import { Box } from '@mui/material'
+import useTaskManager from './hooks/useTaskManager'
+import useTaskListManager from './hooks/useTaskListManager'
+import { VIEW_TYPES } from './constants/viewTypes'
+import useTaskView from './hooks/useTaskView'
 
 export default function App() {
-  const [tasks, setTasks] = useState(() => {
-    const tasksLocalStorage = localStorage.getItem('tasks')
-    return tasksLocalStorage ? JSON.parse(tasksLocalStorage) : []
+  const {
+    createTask,
+    deleteTask,
+    renameTask,
+    checkTask,
+    tasks,
+    getTasksByList,
+    getCompletedTasks,
+  } = useTaskManager()
+
+  const { createList, deleteList, updateList, lists } = useTaskListManager()
+
+  const { currentView, setCurrentView, getVisibleTasks } = useTaskView({
+    tasks,
+    getCompletedTasks,
+    getTasksByList,
   })
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
-
-  const [lists, setLists] = useState(() => {
-    const listsLocalStorage = localStorage.getItem('lists')
-    return listsLocalStorage ? JSON.parse(listsLocalStorage) : []
-  })
-  useEffect(() => {
-    localStorage.setItem('lists', JSON.stringify(lists))
-  }, [lists])
-
-  const [selectedIndex, setSelectedIndex] = useState(1)
-
-  const createTask = (name, listId) => {
-    return {
-      name: name,
-      id: crypto.randomUUID(),
-      creationDate: Date.now(),
-      isDone: false,
-      listId: listId,
-    }
-  }
-  const addTask = newTask => {
-    setTasks([...tasks, newTask])
-  }
-
-  const deleteTask = id => {
-    const newTasks = tasks.filter(task => task.id !== id)
-    setTasks(newTasks)
-  }
-
-  const renameTask = (id, newName) => {
-    const newTasks = tasks.map(task =>
-      task.id === id ? { ...task, name: newName } : task
-    )
-    setTasks(newTasks)
-  }
-
-  const checkTask = id => {
-    const newTasks = tasks.map(task =>
-      task.id === id ? { ...task, isDone: !task.isDone } : task
-    )
-    setTasks(newTasks)
-  }
 
   const handleCreateTask = () => {
     const userInput = prompt('Please enter Task name: ')
-    const newTask = createTask(userInput)
-    addTask(newTask)
-  }
-
-  const createList = (name, color) => {
-    return { name: name, id: crypto.randomUUID(), color: '' }
-  }
-
-  const addList = list => {
-    setLists([...lists, list])
+    const listId =
+      currentView.type === VIEW_TYPES.LIST ? currentView.listId : null
+    createTask(userInput, listId) //falta el listId
   }
 
   return (
@@ -85,14 +49,14 @@ export default function App() {
         >
           <Sidebar
             createList={createList}
-            addList={addList}
             lists={lists}
-            setSelectedIndex={setSelectedIndex}
-            selectedIndex={selectedIndex}
+            currentView={currentView}
+            setCurrentView={setCurrentView}
+            VIEW_TYPES={VIEW_TYPES}
           />
           <Box flexGrow={1}>
             <List>
-              {tasks.map(task => (
+              {getVisibleTasks().map(task => (
                 <Task
                   task={task}
                   key={task.id}
