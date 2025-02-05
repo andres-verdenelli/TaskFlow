@@ -1,14 +1,14 @@
-import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import AddIcon from '@mui/icons-material/Add'
+import { CreateTaskDialog } from './CreateTaskDialog'
+import { useState } from 'react'
 
-export default function Header({ handleCreateTask }) {
+export default function Header({ createTask, currentView }) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   return (
     <Box>
       <AppBar position='static'>
@@ -26,13 +26,18 @@ export default function Header({ handleCreateTask }) {
               color: 'white',
               borderColor: 'white',
             }}
-            onClick={handleCreateTask}
+            onClick={() => setIsDialogOpen(true)}
             endIcon={<AddIcon />}
           >
             create task
           </Button>
         </Toolbar>
       </AppBar>
+      <CreateTaskDialog
+        open={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onSubmit={name => createTask(name, currentView.listId)}
+      />
     </Box>
   )
 }

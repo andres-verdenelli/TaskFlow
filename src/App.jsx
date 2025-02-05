@@ -42,7 +42,10 @@ export default function App() {
         flexDirection={'column'}
         height={'100vh'}
       >
-        <Header handleCreateTask={handleCreateTask} />
+        <Header
+          createTask={createTask}
+          currentView={currentView}
+        />
         <Box
           display={'flex'}
           flexGrow={1}
