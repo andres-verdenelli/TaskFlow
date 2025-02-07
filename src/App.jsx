@@ -28,13 +28,6 @@ export default function App() {
     getTasksByList,
   })
 
-  const handleCreateTask = () => {
-    const userInput = prompt('Please enter Task name: ')
-    const listId =
-      currentView.type === VIEW_TYPES.LIST ? currentView.listId : null
-    createTask(userInput, listId) //falta el listId
-  }
-
   return (
     <>
       <Box

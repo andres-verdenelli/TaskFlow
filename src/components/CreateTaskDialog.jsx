@@ -28,6 +28,12 @@ export function CreateTaskDialog({ open, onClose, onSubmit }) {
           autoFocus
           value={taskName}
           onChange={e => setTaskName(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              handleSubmit()
+            }
+          }}
           label='Task Name'
           fullWidth
         />

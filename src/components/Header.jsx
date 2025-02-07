@@ -6,9 +6,15 @@ import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
 import { CreateTaskDialog } from './CreateTaskDialog'
 import { useState } from 'react'
+import { VIEW_TYPES } from '../constants/viewTypes'
 
 export default function Header({ createTask, currentView }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const handleCreateTask = name => {
+    const listId =
+      currentView.type === VIEW_TYPES.LIST ? currentView.listId : null
+    createTask(name, listId)
+  }
   return (
     <Box>
       <AppBar position='static'>
@@ -36,7 +42,7 @@ export default function Header({ createTask, currentView }) {
       <CreateTaskDialog
         open={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
-        onSubmit={name => createTask(name, currentView.listId)}
+        onSubmit={name => handleCreateTask(name)}
       />
     </Box>
   )
