@@ -26,24 +26,8 @@ export default function Header({ createTask, currentView }) {
           >
             To Do List App
           </Typography>
-          <Button
-            variant='outlined'
-            sx={{
-              color: 'white',
-              borderColor: 'white',
-            }}
-            onClick={() => setIsDialogOpen(true)}
-            endIcon={<AddIcon />}
-          >
-            create task
-          </Button>
         </Toolbar>
       </AppBar>
-      <CreateTaskDialog
-        open={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        onSubmit={name => handleCreateTask(name)}
-      />
     </Box>
   )
 }

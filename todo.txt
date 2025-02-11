@@ -1,4 +1,10 @@
 Lista de features para implementar 📝
+
+
+[] opcion para crear listas
+[] opcion para editar listas
+[] opcion para eliminar Listas listas
+
 Funcionalidades básicas
 [ ] Implementar eliminación de listas
 [ ] Agregar confirmación antes de eliminar tareas/listas
@@ -9,6 +15,7 @@ Mejoras de UX
 [ ] Agregar fechas de vencimiento a las tareas
 [ ] Implementar filtros por fecha (Today/Scheduled)
 [ ] Agregar búsqueda de tareas
+
 Organización
 [ ] Permitir crear sublistas
 [ ] Agregar etiquetas a las tareas

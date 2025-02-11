@@ -24,5 +24,10 @@ export default function useTaskListManager() {
       prev.map(list => (list.id === id ? { ...list, ...updates } : list))
     )
   }
-  return { createList, deleteList, updateList, lists }
+
+  const getListNameById = id => {
+    const list = lists.find(list => list.id === id)
+    return list ? list.name : null
+  }
+  return { createList, deleteList, updateList, lists, getListNameById }
 }

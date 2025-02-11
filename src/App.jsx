@@ -1,13 +1,12 @@
 import './App.css'
 import Sidebar from './components/Sidebar'
 import Task from './components/Task'
-import List from '@mui/material/List'
 import Header from './components/Header'
-import { Box } from '@mui/material'
+import { Box, List } from '@mui/material'
 import useTaskManager from './hooks/useTaskManager'
 import useTaskListManager from './hooks/useTaskListManager'
-import { VIEW_TYPES } from './constants/viewTypes'
 import useTaskView from './hooks/useTaskView'
+import MainContent from './components/MainContent'
 
 export default function App() {
   const {
@@ -20,7 +19,8 @@ export default function App() {
     getCompletedTasks,
   } = useTaskManager()
 
-  const { createList, deleteList, updateList, lists } = useTaskListManager()
+  const { createList, deleteList, updateList, lists, getListNameById } =
+    useTaskListManager()
 
   const { currentView, setCurrentView, getVisibleTasks } = useTaskView({
     tasks,
@@ -35,10 +35,7 @@ export default function App() {
         flexDirection={'column'}
         height={'100vh'}
       >
-        <Header
-          createTask={createTask}
-          currentView={currentView}
-        />
+        <Header />
         <Box
           display={'flex'}
           flexGrow={1}
@@ -48,21 +45,21 @@ export default function App() {
             lists={lists}
             currentView={currentView}
             setCurrentView={setCurrentView}
-            VIEW_TYPES={VIEW_TYPES}
           />
-          <Box flexGrow={1}>
-            <List>
-              {getVisibleTasks().map(task => (
-                <Task
-                  task={task}
-                  key={task.id}
-                  deleteTask={deleteTask}
-                  renameTask={renameTask}
-                  checkTask={checkTask}
-                />
-              ))}
-            </List>
-          </Box>
+          <MainContent
+            getVisibleTasks={getVisibleTasks}
+            deleteTask={deleteTask}
+            renameTask={renameTask}
+            checkTask={checkTask}
+            createTask={createTask}
+            currentView={currentView}
+            getListNameById={getListNameById}
+            updateList={updateList}
+            deleteList={deleteList}
+          />
+        </Box>
+        <Box sx={{ borderTop: '1px solid #e2e2e2' }}>
+          <h1>Footer</h1>
         </Box>
       </Box>
     </>

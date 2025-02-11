@@ -1,55 +1,56 @@
-import { useState } from 'react'
+import Button from '@mui/material/Button'
+import { Add } from '@mui/icons-material'
 import {
   Dialog,
-  DialogTitle,
-  DialogContent,
-  TextField,
   DialogActions,
-  Button,
+  DialogContent,
+  DialogTitle,
+  TextField,
 } from '@mui/material'
-import { Add } from '@mui/icons-material'
+import { useState } from 'react'
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 
-export function CreateTaskDialog({ createTask, currentView }) {
-  const [taskName, setTaskName] = useState('')
+//TODO si apreto enter en vez de create, el boton queda con una animacion tildada
+
+export default function CreateListDialog({ createList }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [textInput, setTextInpup] = useState('')
 
   const handleOpen = () => setIsOpen(true)
   const handleClose = () => setIsOpen(false)
   const handleSubmit = () => {
-    createTask(taskName, currentView.listId)
+    createList(textInput)
     handleClose()
-    setTaskName('')
+    setTextInpup('')
   }
-
   return (
     <>
       <Button
-        variant='outlined'
-        endIcon={<Add />}
+        fullWidth
+        variant='contained'
+        endIcon={<PlaylistAddIcon />}
         onClick={handleOpen}
       >
-        Create Task
+        Create List
       </Button>
       <Dialog
         open={isOpen}
         onClose={handleClose}
       >
-        <DialogTitle>Create New Task</DialogTitle>
+        <DialogTitle>Create List</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
+            label='List Name'
+            value={textInput}
             margin='dense'
-            value={taskName}
-            onChange={e => setTaskName(e.target.value)}
+            onChange={e => setTextInpup(e.target.value)}
             onKeyDown={e => {
               if (e.key === 'Enter') {
                 e.preventDefault()
                 handleSubmit()
               }
             }}
-            label='Task Name'
-            fullWidth
-          />
+          ></TextField>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
