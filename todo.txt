@@ -1,12 +1,11 @@
 Lista de features para implementar 📝
 
-
-[] opcion para crear listas
-[] opcion para editar listas
-[] opcion para eliminar Listas listas
+[x] opcion para crear listas
+[x] opcion para editar listas
+[x] opcion para eliminar Listas listas
 
 Funcionalidades básicas
-[ ] Implementar eliminación de listas
+[x] Implementar eliminación de listas
 [ ] Agregar confirmación antes de eliminar tareas/listas
 [ ] Agregar color a las listas
 [ ] Implementar edición de listas (nombre, color)

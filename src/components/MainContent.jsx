@@ -20,6 +20,7 @@ export default function MainContent({
         display={'flex'}
         justifyContent={'flex-end'}
         p={2}
+        sx={{ borderBottom: '1px solid #e2e2e2' }}
       >
         <CreateTaskDialog
           createTask={createTask}
