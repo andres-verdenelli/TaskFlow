@@ -1,21 +1,19 @@
-import { useState, useEffect } from 'react'
+import { createContext, useState, useEffect } from 'react'
+import { StorageService } from '../services/storage'
 
-export default function useTaskManager() {
-  const [tasks, setTasks] = useState(() => {
-    const tasksLocalStorage = localStorage.getItem('tasks')
-    return tasksLocalStorage ? JSON.parse(tasksLocalStorage) : []
-  })
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
+export const TaskContext = createContext()
+
+export function TaskProvider({ children }) {
+  const [tasks, setTasks] = useState(() => StorageService.get('tasks') || [])
+  useEffect(() => StorageService.set('tasks', tasks), [tasks])
 
   const createTask = (name, listId) => {
     const newTask = {
-      name: name,
+      name,
       id: crypto.randomUUID(),
       creationDate: Date.now(),
       isDone: false,
-      listId: listId,
+      listId,
     }
     setTasks(prev => [...prev, newTask])
     return newTask
@@ -41,8 +39,7 @@ export default function useTaskManager() {
     )
     return id
   }
-
-  const getTasksByList = listId => {
+  const getTasksByListId = listId => {
     return tasks.filter(task => task.listId === listId)
   }
 
@@ -50,14 +47,15 @@ export default function useTaskManager() {
     return tasks.filter(task => task.isDone)
   }
 
-  //CRUD create, read, update, delete
-  return {
+  const value = {
+    tasks,
     createTask,
     deleteTask,
     renameTask,
     checkTask,
-    tasks,
-    getTasksByList,
+    getTasksByListId,
     getCompletedTasks,
   }
+
+  return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>
 }

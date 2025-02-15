@@ -2,13 +2,11 @@ import { Box, List, Divider } from '@mui/material'
 import NavigationItems from './NavigationItems'
 import ListsSection from './ListsSection'
 import CreateListDialog from './CreateListDialog'
+import { useLists } from '../hooks/useLists'
 
-export default function Sidebar({
-  createList,
-  lists,
-  currentView,
-  setCurrentView,
-}) {
+export default function Sidebar() {
+  const { lists, createList } = useLists()
+
   return (
     <>
       <Box
@@ -17,16 +15,9 @@ export default function Sidebar({
         minWidth={200}
       >
         <List>
-          <NavigationItems
-            currentView={currentView}
-            setCurrentView={setCurrentView}
-          />
+          <NavigationItems />
           <Divider sx={{ marginY: '1rem' }} />
-          <ListsSection
-            lists={lists}
-            currentView={currentView}
-            setCurrentView={setCurrentView}
-          />
+          <ListsSection lists={lists} />
           <CreateListDialog createList={createList} />
         </List>
       </Box>

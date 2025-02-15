@@ -1,9 +1,10 @@
-import { useTaskActions } from './useTaskActions'
-import { useTaskSelectors } from './useTaskSelectors'
+import { useContext } from 'react'
+import { TaskContext } from '../context/TaskContext'
 
-export function useTasks() {
-  const actions = useTaskActions()
-  const selectors = useTaskSelectors()
-
-  return { ...actions, ...selectors }
+export const useTasks = () => {
+  const context = useContext(TaskContext)
+  if (!context) {
+    throw new Error('useTasks debe usarse dentro de TaskProvider')
+  }
+  return context
 }

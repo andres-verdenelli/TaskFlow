@@ -1,26 +1,10 @@
-import { useState } from 'react'
-import { VIEW_TYPES } from '../constants/viewTypes'
+import { useContext } from 'react'
+import { ViewContext } from '../context/ViewContext.jsx'
 
-export default function useTaskView({
-  tasks,
-  getCompletedTasks,
-  getTasksByList,
-}) {
-  const [currentView, setCurrentView] = useState({ type: VIEW_TYPES.ALL })
-
-  const getVisibleTasks = () => {
-    switch (currentView.type) {
-      case VIEW_TYPES.ALL:
-        return tasks
-      case VIEW_TYPES.TODAY:
-        return tasks //falta implementar logica de today
-      case VIEW_TYPES.DONE:
-        return getCompletedTasks()
-      case VIEW_TYPES.SCHEDULE:
-        return tasks //falta implementar logica
-      case VIEW_TYPES.LIST:
-        return getTasksByList(currentView.listId)
-    }
+export const useTaskView = () => {
+  const context = useContext(ViewContext)
+  if (!context) {
+    throw new Error('useView debe usarse dentro de ViewProvider')
   }
-  return { currentView, setCurrentView, getVisibleTasks }
+  return context
 }

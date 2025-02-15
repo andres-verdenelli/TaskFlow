@@ -1,19 +1,11 @@
-import { Box, Button, List } from '@mui/material'
+import { Box, List } from '@mui/material'
 import Task from './Task'
 import { CreateTaskDialog } from './CreateTaskDialog'
 import EditListDialog from './EditListDialog'
+import { useTaskView } from '../hooks/useTaskView'
 
-export default function MainContent({
-  getVisibleTasks,
-  deleteTask,
-  renameTask,
-  checkTask,
-  createTask,
-  currentView,
-  getListNameById,
-  updateList,
-  deleteList,
-}) {
+export default function MainContent() {
+  const { visibleTasks, currentView } = useTaskView()
   return (
     <Box flexGrow={1}>
       <Box
@@ -22,25 +14,14 @@ export default function MainContent({
         p={2}
         sx={{ borderBottom: '1px solid #e2e2e2' }}
       >
-        <CreateTaskDialog
-          createTask={createTask}
-          currentView={currentView}
-        />
-        <EditListDialog
-          currentView={currentView}
-          getListNameById={getListNameById}
-          updateList={updateList}
-          deleteList={deleteList}
-        />
+        <CreateTaskDialog currentView={currentView} />
+        <EditListDialog currentView={currentView} />
       </Box>
       <List>
-        {getVisibleTasks().map(task => (
+        {visibleTasks.map(task => (
           <Task
             task={task}
             key={task.id}
-            deleteTask={deleteTask}
-            renameTask={renameTask}
-            checkTask={checkTask}
           />
         ))}
       </List>

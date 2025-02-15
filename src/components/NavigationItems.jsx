@@ -2,8 +2,10 @@ import { GridView } from '@mui/icons-material'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { Today, Schedule, TaskAlt } from '@mui/icons-material'
+import { useTaskView } from '../hooks/useTaskView'
 
-export default function NavigationItems({ currentView, setCurrentView }) {
+export default function NavigationItems() {
+  const { currentView, setCurrentView } = useTaskView()
   return (
     <>
       <ListItemButton

@@ -22,6 +22,7 @@ export default function CreateListDialog({ createList }) {
     createList(textInput)
     handleClose()
     setTextInpup('')
+    console.log(`List Created ${textInput}`)
   }
   return (
     <>

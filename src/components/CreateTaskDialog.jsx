@@ -8,10 +8,13 @@ import {
   Button,
 } from '@mui/material'
 import { Add } from '@mui/icons-material'
+import { useTasks } from '../hooks/useTasks'
 
-export function CreateTaskDialog({ createTask, currentView }) {
+export function CreateTaskDialog({ currentView }) {
   const [taskName, setTaskName] = useState('')
   const [isOpen, setIsOpen] = useState(false)
+
+  const { createTask } = useTasks()
 
   const handleOpen = () => setIsOpen(true)
   const handleClose = () => setIsOpen(false)

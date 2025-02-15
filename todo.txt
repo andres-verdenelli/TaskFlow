@@ -4,6 +4,8 @@ Lista de features para implementar 📝
 [x] opcion para editar listas
 [x] opcion para eliminar Listas listas
 
+[] las tareas no se borran
+
 Funcionalidades básicas
 [x] Implementar eliminación de listas
 [ ] Agregar confirmación antes de eliminar tareas/listas
@@ -23,3 +25,4 @@ Extras
 [ ] Agregar estadísticas (tareas completadas, pendientes)
 [ ] Implementar temas (dark/light mode)
 [ ] Agregar notificaciones para tareas próximas a vencer
+

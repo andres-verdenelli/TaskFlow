@@ -1,7 +1,9 @@
 import TaskList from './TaskList'
 import { VIEW_TYPES } from '../constants/viewTypes'
+import { useTaskView } from '../hooks/useTaskView'
 
-export default function ListsSection({ lists, currentView, setCurrentView }) {
+export default function ListsSection({ lists }) {
+  const { currentView, setCurrentView } = useTaskView()
   return (
     <>
       {lists.map(list => (

@@ -5,8 +5,10 @@ import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 import DeleteIcon from '@mui/icons-material/Delete'
 import IconButton from '@mui/material/IconButton'
+import { useTasks } from '../hooks/useTasks'
 
-export default function Task({ task, deleteTask, renameTask, checkTask }) {
+export default function Task({ task }) {
+  const { deleteTask, renameTask, checkTask } = useTasks()
   return (
     <ListItem sx={{ display: 'flex', alignItems: 'center' }}>
       <Checkbox

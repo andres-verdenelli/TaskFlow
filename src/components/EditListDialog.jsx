@@ -10,15 +10,12 @@ import { useState } from 'react'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import EditIcon from '@mui/icons-material/Edit'
 import { VIEW_TYPES } from '../constants/viewTypes'
+import { useLists } from '../hooks/useLists'
 
-export default function EditListDialog({
-  currentView,
-  getListNameById,
-  updateList,
-  deleteList,
-}) {
+export default function EditListDialog({ currentView }) {
   const [isOpen, setIsOpen] = useState(false)
   const [textInput, setTextInput] = useState('')
+  const { getListNameById, updateList, deleteList } = useLists()
 
   const handleOpen = () => {
     setIsOpen(true)
