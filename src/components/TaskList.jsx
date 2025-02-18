@@ -3,7 +3,7 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import CircleIcon from '@mui/icons-material/Circle'
 
-export default function TaskList({ name, selected, onClick }) {
+export default function TaskList({ name, selected, onClick, color }) {
   return (
     <>
       <ListItemButton
@@ -13,7 +13,7 @@ export default function TaskList({ name, selected, onClick }) {
         }}
       >
         <ListItemIcon>
-          <CircleIcon color='primary' />
+          <CircleIcon color={color} />
         </ListItemIcon>
         <ListItemText>{name}</ListItemText>
       </ListItemButton>

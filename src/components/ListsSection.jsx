@@ -1,8 +1,10 @@
 import TaskList from './TaskList'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { useTaskView } from '../hooks/useTaskView'
+import { useLists } from '../hooks/useLists'
 
-export default function ListsSection({ lists }) {
+export default function ListsSection() {
+  const { lists } = useLists()
   const { currentView, setCurrentView } = useTaskView()
   return (
     <>
@@ -17,6 +19,7 @@ export default function ListsSection({ lists }) {
           onClick={() =>
             setCurrentView({ type: VIEW_TYPES.LIST, listId: list.id })
           }
+          color={list.color}
         />
       ))}
     </>

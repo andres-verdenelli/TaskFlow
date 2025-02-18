@@ -17,9 +17,8 @@ export function ListProvider({ children }) {
   // Acciones
   const createList = name => {
     const newList = {
-      name,
+      name: name,
       id: crypto.randomUUID(),
-      color: null,
     }
     setLists(prev => [...prev, newList])
     return newList
