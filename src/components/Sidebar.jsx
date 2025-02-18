@@ -8,19 +8,20 @@ export default function Sidebar() {
   const { lists, createList } = useLists()
 
   return (
-    <>
-      <Box
-        sx={{ borderRight: '1px solid #e0e0e0' }}
-        p={2}
-        minWidth={200}
-      >
-        <List>
-          <NavigationItems />
-          <Divider sx={{ marginY: '1rem' }} />
-          <ListsSection lists={lists} />
-          <CreateListDialog createList={createList} />
-        </List>
-      </Box>
-    </>
+    <Box
+      borderRight={'1px solid #e0e0e0'}
+      p={2}
+      minWidth={200}
+      display={'flex'}
+      flexDirection={'column'}
+      justifyContent={'space-between'}
+    >
+      <List>
+        <NavigationItems />
+        <Divider sx={{ marginY: '1rem' }} />
+        <ListsSection lists={lists} />
+      </List>
+      <CreateListDialog createList={createList} />
+    </Box>
   )
 }

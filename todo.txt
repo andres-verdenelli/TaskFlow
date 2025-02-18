@@ -4,13 +4,13 @@ Lista de features para implementar 📝
 [x] opcion para editar listas
 [x] opcion para eliminar Listas listas
 
-[] las tareas no se borran
+[x] las tareas no se borran
 
 Funcionalidades básicas
 [x] Implementar eliminación de listas
 [ ] Agregar confirmación antes de eliminar tareas/listas
 [ ] Agregar color a las listas
-[ ] Implementar edición de listas (nombre, color)
+[x] Implementar edición de listas (nombre, color)
 Mejoras de UX
 [ ] Agregar drag and drop para reordenar tareas
 [ ] Agregar fechas de vencimiento a las tareas
