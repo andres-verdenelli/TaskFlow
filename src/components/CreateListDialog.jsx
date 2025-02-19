@@ -89,7 +89,10 @@ export default function CreateListDialog() {
                   value={value}
                   onClick={() => setColor(value)}
                 >
-                  <Box display={'flex'}>
+                  <Box
+                    display={'flex'}
+                    width={100}
+                  >
                     <Circle
                       color={value}
                       sx={{ paddingRight: '.5rem' }}

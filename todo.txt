@@ -26,3 +26,4 @@ Extras
 [ ] Implementar temas (dark/light mode)
 [ ] Agregar notificaciones para tareas próximas a vencer
 
+[] props validations
