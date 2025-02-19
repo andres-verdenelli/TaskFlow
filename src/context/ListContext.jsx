@@ -1,23 +1,20 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { StorageService } from '../services/storage'
 
-// Creamos el contexto
 export const ListContext = createContext()
 
-// Creamos el Provider
 export function ListProvider({ children }) {
-  // Estado centralizado de listas
   const [lists, setLists] = useState(() => StorageService.get('lists') || [])
 
-  // Persistencia en localStorage
   useEffect(() => {
     StorageService.set('lists', lists)
   }, [lists])
 
-  // Acciones
-  const createList = name => {
+  // Actions
+  const createList = (name, color) => {
     const newList = {
-      name: name,
+      name,
+      color,
       id: crypto.randomUUID(),
     }
     setLists(prev => [...prev, newList])
@@ -34,7 +31,9 @@ export function ListProvider({ children }) {
     )
   }
 
-  // Selectores
+  // Selectors
+
+  //TODO este es reemplazable o redundante por el de abajo
   const getListNameById = id => {
     const list = lists.find(list => list.id === id)
     return list ? list.name : null
@@ -44,7 +43,6 @@ export function ListProvider({ children }) {
     return lists.find(list => list.id === id)
   }
 
-  // Valor del contexto
   const value = {
     lists,
     createList,

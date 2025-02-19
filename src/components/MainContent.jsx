@@ -1,8 +1,9 @@
 import { Box, List } from '@mui/material'
 import Task from './Task'
 import { CreateTaskDialog } from './CreateTaskDialog'
-import EditListDialog from './EditListDialog'
 import { useTaskView } from '../hooks/useTaskView'
+import ListDialog from './ListDialog'
+import { VIEW_TYPES } from '../constants/viewTypes'
 
 export default function MainContent() {
   const { visibleTasks, currentView } = useTaskView()
@@ -15,7 +16,13 @@ export default function MainContent() {
         sx={{ borderBottom: '1px solid #e2e2e2' }}
       >
         <CreateTaskDialog currentView={currentView} />
-        <EditListDialog currentView={currentView} />
+        {/* <EditListDialog currentView={currentView} /> */}
+        {currentView.type === VIEW_TYPES.LIST && (
+          <ListDialog
+            mode='edit'
+            listId={currentView.listId}
+          />
+        )}
       </Box>
       <List>
         {visibleTasks.map(task => (

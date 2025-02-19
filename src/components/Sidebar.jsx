@@ -1,7 +1,7 @@
 import { Box, List, Divider } from '@mui/material'
 import NavigationItems from './NavigationItems'
 import ListsSection from './ListsSection'
-import CreateListDialog from './CreateListDialog'
+import ListDialog from './ListDialog'
 
 export default function Sidebar() {
   return (
@@ -18,7 +18,8 @@ export default function Sidebar() {
         <Divider sx={{ marginY: '1rem' }} />
         <ListsSection />
       </List>
-      <CreateListDialog />
+      {/* <CreateListDialog /> */}
+      <ListDialog />
     </Box>
   )
 }
