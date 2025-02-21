@@ -3,27 +3,28 @@ Lista de features para implementar 📝
 [x] opcion para crear listas
 [x] opcion para editar listas
 [x] opcion para eliminar Listas listas
-
 [x] las tareas no se borran
-
-Funcionalidades básicas
 [x] Implementar eliminación de listas
-[ ] Agregar confirmación antes de eliminar tareas/listas
-[ ] Agregar color a las listas
+[x] Agregar color a las listas
 [x] Implementar edición de listas (nombre, color)
-Mejoras de UX
-[ ] Agregar drag and drop para reordenar tareas
-[ ] Agregar fechas de vencimiento a las tareas
-[ ] Implementar filtros por fecha (Today/Scheduled)
+[ ] Subir a Vercel
+[ ] Actualizar LinkedIn (poner que estoy buscando pasantias no remuneradas en startup y experiencia)
+ 
+[ ] Menu de edicion de tareas y propiedades
+    [ ] fecha de inicio
+    [ ] fecha de fin
+    [ ] prioridad
+    [ ] notas
+    [ ] Agregar etiquetas a las tareas
+[ ] Agregar confirmación antes de eliminar tareas/listas
+[ ] Implementar filtros Today/Scheduled/done
+[ ] Permitir ordenar tareas por diferentes criterios
 [ ] Agregar búsqueda de tareas
 
-Organización
-[ ] Permitir crear sublistas
-[ ] Agregar etiquetas a las tareas
-[ ] Permitir ordenar tareas por diferentes criterios
-Extras
-[ ] Agregar estadísticas (tareas completadas, pendientes)
-[ ] Implementar temas (dark/light mode)
-[ ] Agregar notificaciones para tareas próximas a vencer
 
-[] props validations
+Advance
+[ ] tarea recursivas
+[ ] notificaciones
+[ ] props validations
+[ ] Permitir crear sublistas
+[ ] Implementar temas (dark/light mode)

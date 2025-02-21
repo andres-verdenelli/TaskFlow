@@ -7,11 +7,12 @@ export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(() => StorageService.get('tasks') || [])
   useEffect(() => StorageService.set('tasks', tasks), [tasks])
 
-  const createTask = (name, listId) => {
+  const createTask = (name, listId, dueDate) => {
     const newTask = {
       name,
       id: crypto.randomUUID(),
       creationDate: Date.now(),
+      dueDate,
       isDone: false,
       listId,
     }
@@ -39,6 +40,8 @@ export function TaskProvider({ children }) {
     )
     return id
   }
+
+  // Selectors
   const getTasksByListId = listId => {
     return tasks.filter(task => task.listId === listId)
   }

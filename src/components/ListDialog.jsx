@@ -18,14 +18,14 @@ import { COLORS } from '../constants/colors'
 
 //TODO
 //[] apretar enter y mandar formulario
+//[] autofocus component
 
 export default function ListDialog({ mode = 'create', listId = null }) {
   const [isOpen, setIsOpen] = useState(false)
   const [listName, setListName] = useState('')
-  const [color, setColor] = useState('')
+  const [color, setColor] = useState('primary')
   const { createList, updateList, getListById, deleteList } = useLists()
   const isEditMode = mode === 'edit'
-
   useEffect(() => {
     if (isEditMode && isOpen && listId) {
       const list = getListById(listId)
@@ -39,12 +39,12 @@ export default function ListDialog({ mode = 'create', listId = null }) {
   }
   const handleClose = () => {
     setIsOpen(false)
-    setListName('')
-    setColor('')
   }
   const handleSubmit = () => {
-    //evitar enviar formulario en blanco
-
+    if (!listName.trim()) {
+      handleClose()
+      return
+    }
     if (isEditMode) {
       updateList(listId, { name: listName, color })
     }
@@ -52,6 +52,8 @@ export default function ListDialog({ mode = 'create', listId = null }) {
       createList(listName, color)
     }
     handleClose()
+    setListName('')
+    setColor('primary')
   }
 
   const handleDelete = () => {

@@ -33,12 +33,6 @@ export function ListProvider({ children }) {
 
   // Selectors
 
-  //TODO este es reemplazable o redundante por el de abajo
-  const getListNameById = id => {
-    const list = lists.find(list => list.id === id)
-    return list ? list.name : null
-  }
-
   const getListById = id => {
     return lists.find(list => list.id === id)
   }
@@ -48,7 +42,6 @@ export function ListProvider({ children }) {
     createList,
     deleteList,
     updateList,
-    getListNameById,
     getListById,
   }
 
