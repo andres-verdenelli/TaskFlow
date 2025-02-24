@@ -6,7 +6,9 @@ import {
   TextField,
   DialogActions,
   Button,
+  IconButton,
   Box,
+  List,
   Select,
   MenuItem,
   InputLabel,
@@ -17,6 +19,7 @@ import {
 import { Add } from '@mui/icons-material'
 import { useTasks } from '../hooks/useTasks'
 import { useTaskView } from '../hooks/useTaskView'
+import { DateCalendar, DatePicker } from '@mui/x-date-pickers'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import dayjs from 'dayjs'
 
@@ -49,15 +52,12 @@ export function CreateTaskDialog() {
         open={isOpen}
         onClose={handleClose}
       >
-        <DialogTitle sx={{ border: '1px solid red' }}>
-          Create New Task
-        </DialogTitle>
-        <DialogContent sx={{ border: '1px solid red' }}>
+        <DialogTitle>Create New Task</DialogTitle>
+        <DialogContent>
           <Box
             display={'flex'}
             flexDirection={'column'}
           >
-            {/* TASK NAME */}
             <TextField
               autoFocus
               margin='dense'
@@ -72,7 +72,6 @@ export function CreateTaskDialog() {
               label='Task Name'
               fullWidth
             />
-            {/* LIST */}
             <FormControl>
               <InputLabel id='demo-simple-select-label'>List</InputLabel>
               <Select
@@ -85,21 +84,17 @@ export function CreateTaskDialog() {
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            {/* NOTES */}
             <TextField
               id='outlined-basic'
               label='Notes'
               variant='outlined'
             />
-            {/* TAGS */}
             <TextField
               id='outlined-basic'
               label='Tags'
               variant='outlined'
             />
-
-            {/* DATE PICKER */}
-            {/* <DatePicker
+            <DatePicker
               value={dueDate}
               format='DD MMM'
               label='Due Date'
@@ -117,10 +112,8 @@ export function CreateTaskDialog() {
                   actions: ['clear', 'today'],
                 },
               }}
-            /> */}
-
+            />
             <Box>
-              {/* START DATE */}
               <Button
                 variant='contained'
                 startIcon={<CalendarTodayIcon />}
@@ -129,7 +122,6 @@ export function CreateTaskDialog() {
               </Button>
             </Box>
             <Box>
-              {/* DUE DATE */}
               <Button
                 variant='contained'
                 startIcon={<CalendarTodayIcon />}
@@ -141,12 +133,9 @@ export function CreateTaskDialog() {
               display={'flex'}
               alignItems={'center'}
             >
-              {/* STARRED */}
               <Checkbox></Checkbox>
               <Typography>Stared</Typography>
             </Box>
-
-            {/* PRIORITY */}
             <FormControl>
               <InputLabel id='demo-simple-select-label'>Priority</InputLabel>
               <Select
@@ -161,17 +150,8 @@ export function CreateTaskDialog() {
             </FormControl>
           </Box>
         </DialogContent>
-        <DialogActions
-          sx={{ border: '1px solid red', justifyContent: 'space-between' }}
-        >
-          {/* ACTIONS */}
-
-          <Button
-            variant='outlined'
-            onClick={handleClose}
-          >
-            Cancel
-          </Button>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={handleSubmit}
             variant='contained'

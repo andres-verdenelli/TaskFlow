@@ -1,8 +1,13 @@
-# React + Vite
+🚀 Yet Another To-Do App - A modern and minimalist task management app built with React, featuring user authentication, task filtering, and local storage support. Ideal for tracking daily productivity.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tech stack:
+• ⚛️ React with functional components
+• 🎨 CSS Modules for scoped styles
+• 🔥 Firebase for authentication and database (not yet)
+• 📦 Context API for state management
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛠 Features:
+✅ Add, edit, and delete tasks
+✅ Mark tasks as completed
+✅ Filter tasks by status
+✅ Responsive design

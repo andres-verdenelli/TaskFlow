@@ -15,8 +15,7 @@ export default function MainContent() {
         p={2}
         sx={{ borderBottom: '1px solid #e2e2e2' }}
       >
-        <CreateTaskDialog currentView={currentView} />
-        {/* <EditListDialog currentView={currentView} /> */}
+        <CreateTaskDialog />
         {currentView.type === VIEW_TYPES.LIST && (
           <ListDialog
             mode='edit'

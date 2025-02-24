@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import ListItem from '@mui/material/ListItem'
-import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 import DeleteIcon from '@mui/icons-material/Delete'
 import IconButton from '@mui/material/IconButton'
 import { useTasks } from '../hooks/useTasks'
+import EditIcon from '@mui/icons-material/Edit'
 
 export default function Task({ task }) {
   const { deleteTask, renameTask, checkTask } = useTasks()
@@ -23,6 +22,9 @@ export default function Task({ task }) {
       ></TextField>
       <IconButton onClick={() => deleteTask(task.id)}>
         <DeleteIcon />
+      </IconButton>
+      <IconButton>
+        <EditIcon />
       </IconButton>
     </ListItem>
   )
