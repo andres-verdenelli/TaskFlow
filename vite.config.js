@@ -9,5 +9,6 @@ export default defineConfig({
   },
   server: {
     sourcemap: false, // asegúrate de aplicar también para desarrollo
+    port: 5174,
   },
 })

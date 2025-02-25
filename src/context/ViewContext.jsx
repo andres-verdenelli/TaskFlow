@@ -1,16 +1,35 @@
 import { createContext, useEffect, useState } from 'react'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { useTasks } from '../hooks/useTasks'
+import { useLists } from '../hooks/useLists'
 
 export const ViewContext = createContext()
 
 export function ViewProvider({ children }) {
+  const { getListById } = useLists()
+
   const [currentView, setCurrentView] = useState({
     type: VIEW_TYPES.ALL,
     listId: null,
   })
   const { getCompletedTasks, getTasksByListId, tasks } = useTasks()
   const [visibleTasks, setVisibleTasks] = useState(tasks)
+
+  const getCurrentViewName = () => {
+    if (currentView.type === VIEW_TYPES.LIST) {
+      const listId = currentView.listId
+      const list = getListById(listId)
+      if (!list) {
+        setCurrentView({ type: VIEW_TYPES.ALL, listId: null })
+        return 'All'
+      }
+      return list.name
+    } else {
+      return (
+        currentView.type.charAt(0).toUpperCase() + currentView.type.slice(1)
+      )
+    }
+  }
 
   useEffect(() => {
     switch (currentView.type) {
@@ -35,7 +54,9 @@ export function ViewProvider({ children }) {
   }, [currentView, tasks, getCompletedTasks, getTasksByListId])
 
   return (
-    <ViewContext.Provider value={{ currentView, setCurrentView, visibleTasks }}>
+    <ViewContext.Provider
+      value={{ currentView, setCurrentView, visibleTasks, getCurrentViewName }}
+    >
       {children}
     </ViewContext.Provider>
   )

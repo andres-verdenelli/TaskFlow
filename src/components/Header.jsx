@@ -1,20 +1,53 @@
+import { Button, IconButton, useMediaQuery, useTheme } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import { Menu } from '@mui/icons-material'
+import { useTaskView } from '../hooks/useTaskView'
+import { VIEW_TYPES } from '../constants/viewTypes'
+import ListDialog from './ListDialog'
 
-export default function Header() {
+export default function Header({ setOpenSidebar }) {
+  const { getCurrentViewName, currentView } = useTaskView()
+
+  const theme = useTheme()
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'))
+
   return (
     <Box>
       <AppBar position='static'>
-        <Toolbar>
+        <Toolbar
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3,1fr)',
+            justifyItems: 'center',
+          }}
+        >
+          {!isDesktop && (
+            <Box justifySelf={'left'}>
+              <IconButton
+                edge='start'
+                onClick={() => setOpenSidebar(true)}
+              >
+                <Menu />
+              </IconButton>
+            </Box>
+          )}
           <Typography
-            variant='h6'
-            component='div'
-            sx={{ flexGrow: 1 }}
+            variant='h1'
+            fontSize={'1.4rem'}
           >
-            To Do List App
+            {getCurrentViewName()}
           </Typography>
+          <Box justifySelf={'end'}>
+            {currentView.type === VIEW_TYPES.LIST && (
+              <ListDialog
+                mode='edit'
+                listId={currentView.listId}
+              />
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

@@ -3,8 +3,10 @@ import Header from './components/Header'
 import { Box } from '@mui/material'
 import MainContent from './components/MainContent'
 import Footer from './components/Footer'
+import { useState } from 'react'
 
 export default function App() {
+  const [openSidebar, setOpenSidebar] = useState(false)
   return (
     <>
       <Box
@@ -12,15 +14,18 @@ export default function App() {
         flexDirection={'column'}
         height={'100vh'}
       >
-        <Header />
+        <Header setOpenSidebar={setOpenSidebar} />
         <Box
           display={'flex'}
           flexGrow={1}
         >
-          <Sidebar />
+          <Sidebar
+            openSidebar={openSidebar}
+            setOpenSidebar={setOpenSidebar}
+          />
           <MainContent />
         </Box>
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </>
   )

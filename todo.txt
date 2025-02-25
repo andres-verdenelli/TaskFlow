@@ -28,3 +28,4 @@ Advance
 [ ] props validations
 [ ] Permitir crear sublistas
 [ ] Implementar temas (dark/light mode)
+[ ] implementar JSON server
