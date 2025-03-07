@@ -13,6 +13,8 @@ import {
   FormControl,
   Checkbox,
   Typography,
+  IconButton,
+  Fab,
 } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { useTasks } from '../hooks/useTasks'
@@ -38,13 +40,20 @@ export function CreateTaskDialog() {
 
   return (
     <>
-      <Button
-        variant='outlined'
-        endIcon={<Add />}
-        onClick={handleOpen}
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: { xs: 16, sm: 24 },
+          right: { xs: 16, sm: 24 },
+        }}
       >
-        Create Task
-      </Button>
+        <Fab
+          color='primary'
+          onClick={handleOpen}
+        >
+          <Add />
+        </Fab>
+      </Box>
       <Dialog
         open={isOpen}
         onClose={handleClose}

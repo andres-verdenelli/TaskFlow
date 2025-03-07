@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import { Menu } from '@mui/icons-material'
 import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
-import ListDialog from './ListDialog'
+import CreateTaskListDialog from '../components/CreateTaskListDialog'
 
 export default function Header({ setOpenSidebar }) {
   const { getCurrentViewName, currentView } = useTaskView()
@@ -42,7 +42,7 @@ export default function Header({ setOpenSidebar }) {
           </Typography>
           <Box justifySelf={'end'}>
             {currentView.type === VIEW_TYPES.LIST && (
-              <ListDialog
+              <CreateTaskListDialog
                 mode='edit'
                 listId={currentView.listId}
               />

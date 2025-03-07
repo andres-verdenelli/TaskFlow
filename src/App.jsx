@@ -1,8 +1,8 @@
-import Sidebar from './components/Sidebar'
-import Header from './components/Header'
+import Sidebar from './layouts/Sidebar'
+import Header from './layouts/Header'
 import { Box } from '@mui/material'
-import MainContent from './components/MainContent'
-import Footer from './components/Footer'
+import MainContent from './layouts/MainContent'
+// import Footer from './layouts/Footer'
 import { useState } from 'react'
 
 export default function App() {

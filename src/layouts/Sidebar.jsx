@@ -6,9 +6,9 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material'
-import NavigationItems from './NavigationItems'
-import ListsSection from './ListsSection'
-import ListDialog from './ListDialog'
+import NavigationItems from '../components/NavigationItems'
+import TaskListSection from '../components/TaskListsSection'
+import CreateListDialog from '../components/CreateTaskListDialog'
 
 export default function Sidebar({ openSidebar, setOpenSidebar }) {
   const theme = useTheme()
@@ -17,16 +17,16 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
   const SidebarContent = () => (
     <Box
       borderRight={'1px solid #e0e0e0'}
-      minWidth={200} //aca la ia sugiere width 240
+      minWidth={200}
       display={'flex'}
       flexDirection={'column'}
-      justifyContent={'space-between'}
+      justifyContent={'space`-between'}
       height={'100%'}
     >
       <List>
-        <NavigationItems />
+        <NavigationItems setOpenSidebar={setOpenSidebar} />
         <Divider sx={{ marginY: '1rem' }} />
-        <ListsSection />
+        <TaskListSection setOpenSidebar={setOpenSidebar} />
       </List>
       <Box
         padding={1}
@@ -35,7 +35,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
         justifyContent={'center'}
         onClick={e => e.stopPropagation()}
       >
-        <ListDialog />
+        <CreateListDialog />
       </Box>
     </Box>
   )

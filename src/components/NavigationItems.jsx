@@ -4,7 +4,7 @@ import { VIEW_TYPES } from '../constants/viewTypes'
 import { Today, Schedule, TaskAlt } from '@mui/icons-material'
 import { useTaskView } from '../hooks/useTaskView'
 
-export default function NavigationItems() {
+export default function NavigationItems({ setOpenSidebar }) {
   const { currentView, setCurrentView } = useTaskView()
   return (
     <>
@@ -12,6 +12,7 @@ export default function NavigationItems() {
         selected={currentView.type === VIEW_TYPES.ALL}
         onClick={() => {
           setCurrentView({ type: VIEW_TYPES.ALL })
+          setOpenSidebar(false)
         }}
       >
         <ListItemIcon>
@@ -21,7 +22,10 @@ export default function NavigationItems() {
       </ListItemButton>
       <ListItemButton
         selected={currentView.type === VIEW_TYPES.TODAY}
-        onClick={() => setCurrentView({ type: VIEW_TYPES.TODAY })}
+        onClick={() => {
+          setCurrentView({ type: VIEW_TYPES.TODAY })
+          setOpenSidebar(false)
+        }}
       >
         <ListItemIcon>
           <Today />
@@ -30,7 +34,10 @@ export default function NavigationItems() {
       </ListItemButton>
       <ListItemButton
         selected={currentView.type === VIEW_TYPES.SCHEDULE}
-        onClick={() => setCurrentView({ type: VIEW_TYPES.SCHEDULE })}
+        onClick={() => {
+          setCurrentView({ type: VIEW_TYPES.SCHEDULE })
+          setOpenSidebar(false)
+        }}
       >
         <ListItemIcon>
           <Schedule />
@@ -39,7 +46,10 @@ export default function NavigationItems() {
       </ListItemButton>
       <ListItemButton
         selected={currentView.type === VIEW_TYPES.DONE}
-        onClick={() => setCurrentView({ type: VIEW_TYPES.DONE })}
+        onClick={() => {
+          setCurrentView({ type: VIEW_TYPES.DONE })
+          setOpenSidebar(false)
+        }}
       >
         <ListItemIcon>
           <TaskAlt />
