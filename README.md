@@ -64,7 +64,7 @@ _(Coming soon…)_
 
 🚧 **TaskFlow is in active development!** 🚧
 
-Check out the [Roadmap](https://github.com/users/andres-verdenelli/projects/1), [Issues](https://github.com/andres-verdenelli/TaskFlow/issues) and [Milestones](https://github.com/andres-verdenelli/TaskFlow/milestonesto) see:
+Check out the [Roadmap](https://github.com/users/andres-verdenelli/projects/1), [Issues](https://github.com/andres-verdenelli/TaskFlow/issues) and [Milestones](https://github.com/andres-verdenelli/TaskFlow/milestones) see:
 
 • Upcoming features
 
