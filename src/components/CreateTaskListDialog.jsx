@@ -7,16 +7,13 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
   TextField,
-  useMediaQuery,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLists } from '../hooks/useLists'
-// import { useTaskView } from '../contexts/ViewContext'
 import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { COLORS } from '../constants/colors'
@@ -31,8 +28,6 @@ export default function ListDialog({ mode = 'create', listId = null }) {
   const [color, setColor] = useState('primary')
   const { createList, updateList, getListById, deleteList } = useLists()
   const { setCurrentView } = useTaskView()
-
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
   const isEditMode = mode === 'edit'
   useEffect(() => {
@@ -73,19 +68,13 @@ export default function ListDialog({ mode = 'create', listId = null }) {
 
   return (
     <>
-      {isSmallScreen ? (
-        <IconButton onClick={handleOpen}>
-          {isEditMode ? <EditNote /> : <PlaylistAdd />}
-        </IconButton>
-      ) : (
-        <Button
-          variant='contained'
-          endIcon={isEditMode ? <EditNote /> : <PlaylistAdd />}
-          onClick={handleOpen}
-        >
-          {isEditMode ? 'Edit List' : 'Create List'}
-        </Button>
-      )}
+      <Button
+        variant='contained'
+        endIcon={isEditMode ? <EditNote /> : <PlaylistAdd />}
+        onClick={handleOpen}
+      >
+        {isEditMode ? 'Edit List' : 'Create List'}
+      </Button>
       <Dialog
         open={isOpen}
         onClose={handleClose}
