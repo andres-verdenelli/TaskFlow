@@ -2,7 +2,6 @@ import Sidebar from './layouts/Sidebar'
 import Header from './layouts/Header'
 import { Box } from '@mui/material'
 import MainContent from './layouts/MainContent'
-// import Footer from './layouts/Footer'
 import { useState } from 'react'
 
 export default function App() {
@@ -25,7 +24,6 @@ export default function App() {
           />
           <MainContent />
         </Box>
-        {/* <Footer /> */}
       </Box>
     </>
   )
