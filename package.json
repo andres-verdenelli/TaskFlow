@@ -17,6 +17,7 @@
     "@mui/x-date-pickers": "^7.27.0",
     "@tailwindcss/vite": "^4.1.0",
     "dayjs": "^1.11.13",
+    "lucide-react": "^0.486.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^4.1.0"
