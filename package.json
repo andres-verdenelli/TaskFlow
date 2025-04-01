@@ -15,9 +15,11 @@
     "@mui/icons-material": "^6.4.2",
     "@mui/material": "^6.4.5",
     "@mui/x-date-pickers": "^7.27.0",
+    "@tailwindcss/vite": "^4.1.0",
     "dayjs": "^1.11.13",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^4.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
@@ -27,6 +29,8 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "vite": "^5.2.0"
   }
 }
