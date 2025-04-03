@@ -3,19 +3,43 @@ import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { Today, Schedule, TaskAlt } from '@mui/icons-material'
 import { useTaskView } from '../hooks/useTaskView'
-import { LayoutDashboard } from 'lucide-react'
+import { LayoutDashboard, Calendar1, Clock, CircleCheckBig } from 'lucide-react'
 
 export default function NavigationItems({ setOpenSidebar }) {
   const { currentView, setCurrentView } = useTaskView()
   return (
     <>
-      <div>
-        <div className='flex'>
-          <div>
+      <div className='border-1 border-black'>
+        <div className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
+          <div className='mr-2'>
             <LayoutDashboard />
           </div>
           <div>
             <span>All</span>
+          </div>
+        </div>
+        <div className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
+          <div className='mr-2'>
+            <Calendar1 />
+          </div>
+          <div>
+            <span>Today</span>
+          </div>
+        </div>
+        <button className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
+          <div className='mr-2'>
+            <Clock />
+          </div>
+          <div>
+            <span>Scheduled</span>
+          </div>
+        </button>
+        <div className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
+          <div className='mr-2'>
+            <CircleCheckBig />
+          </div>
+          <div>
+            <span>Done</span>
           </div>
         </div>
       </div>
