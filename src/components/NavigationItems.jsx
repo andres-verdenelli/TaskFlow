@@ -1,48 +1,41 @@
-import { GridView } from '@mui/icons-material'
-import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+// import { GridView } from '@mui/icons-material'
+// import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+// import { Today, Schedule, TaskAlt } from '@mui/icons-material'
 import { VIEW_TYPES } from '../constants/viewTypes'
-import { Today, Schedule, TaskAlt } from '@mui/icons-material'
 import { useTaskView } from '../hooks/useTaskView'
 import { LayoutDashboard, Calendar1, Clock, CircleCheckBig } from 'lucide-react'
 
 export default function NavigationItems({ setOpenSidebar }) {
+  const ListItem = (text, Icon, viewType) => {
+    const isSelected = currentView.type === viewType
+
+    return (
+      <button
+        className={`mb-2 flex w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 ${isSelected && 'bg-gray-100'}`}
+        onClick={() => {
+          setCurrentView({ type: viewType })
+          setOpenSidebar(false)
+        }}
+      >
+        <div className='mr-2'>
+          <Icon />
+        </div>
+        <div>
+          <span>{text}</span>
+        </div>
+      </button>
+    )
+  }
   const { currentView, setCurrentView } = useTaskView()
   return (
     <>
-      <div className='border-1 border-black'>
-        <div className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
-          <div className='mr-2'>
-            <LayoutDashboard />
-          </div>
-          <div>
-            <span>All</span>
-          </div>
-        </div>
-        <div className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
-          <div className='mr-2'>
-            <Calendar1 />
-          </div>
-          <div>
-            <span>Today</span>
-          </div>
-        </div>
-        <button className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
-          <div className='mr-2'>
-            <Clock />
-          </div>
-          <div>
-            <span>Scheduled</span>
-          </div>
-        </button>
-        <div className='mx-4 my-2 flex cursor-pointer rounded-md p-2 hover:bg-gray-100'>
-          <div className='mr-2'>
-            <CircleCheckBig />
-          </div>
-          <div>
-            <span>Done</span>
-          </div>
-        </div>
+      <div className='p-2'>
+        {ListItem('All', LayoutDashboard, VIEW_TYPES.ALL)}
+        {ListItem('Today', Calendar1, VIEW_TYPES.TODAY)}
+        {ListItem('Scheduled', Clock, VIEW_TYPES.SCHEDULE)}
+        {ListItem('Done', CircleCheckBig, VIEW_TYPES.DONE)}
       </div>
+      {/* 
       <ListItemButton
         selected={currentView.type === VIEW_TYPES.ALL}
         onClick={() => {
@@ -90,7 +83,7 @@ export default function NavigationItems({ setOpenSidebar }) {
           <TaskAlt />
         </ListItemIcon>
         <ListItemText>Done</ListItemText>
-      </ListItemButton>
+      </ListItemButton> */}
     </>
   )
 }
