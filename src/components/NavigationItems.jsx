@@ -3,11 +3,22 @@ import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { Today, Schedule, TaskAlt } from '@mui/icons-material'
 import { useTaskView } from '../hooks/useTaskView'
+import { LayoutDashboard } from 'lucide-react'
 
 export default function NavigationItems({ setOpenSidebar }) {
   const { currentView, setCurrentView } = useTaskView()
   return (
     <>
+      <div>
+        <div className='flex'>
+          <div>
+            <LayoutDashboard />
+          </div>
+          <div>
+            <span>All</span>
+          </div>
+        </div>
+      </div>
       <ListItemButton
         selected={currentView.type === VIEW_TYPES.ALL}
         onClick={() => {
