@@ -2,11 +2,6 @@ import { VIEW_TYPES } from '../constants/viewTypes'
 import { useTaskView } from '../hooks/useTaskView'
 import { useLists } from '../hooks/useLists'
 import { Circle } from 'lucide-react'
-// import ListItemButton from '@mui/material/ListItemButton'
-// import TaskList from './TaskList'
-// import ListItemText from '@mui/material/ListItemText'
-// import ListItemIcon from '@mui/material/ListItemIcon'
-// import CircleIcon from '@mui/icons-material/Circle'
 
 export default function TaskListSection({ setOpenSidebar }) {
   const { lists } = useLists()
@@ -34,21 +29,6 @@ export default function TaskListSection({ setOpenSidebar }) {
   }
   return (
     <>
-      {/* {lists.map(list => (
-        <TaskList
-          key={list.id}
-          name={list.name}
-          selected={
-            currentView.type === VIEW_TYPES.LIST &&
-            currentView.listId === list.id
-          }
-          onClick={() => {
-            setCurrentView({ type: VIEW_TYPES.LIST, listId: list.id })
-            setOpenSidebar(false)
-          }}
-          color={list.color}
-        />
-      ))} */}
       {lists.map(list => (
         <TaskListFn
           key={list.id}
