@@ -25,7 +25,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
     >
       <List>
         <NavigationItems setOpenSidebar={setOpenSidebar} />
-        <Divider sx={{ marginY: '1rem' }} />
+        <div className='w-full border-b-1 border-gray-300'></div>
         <TaskListSection setOpenSidebar={setOpenSidebar} />
       </List>
       <Box
