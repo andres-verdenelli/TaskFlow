@@ -1,48 +1,26 @@
-import {
-  Box,
-  List,
-  Divider,
-  Drawer,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material'
+import { Drawer } from '@mui/material'
 import NavigationItems from '../components/NavigationItems'
 import TaskListSection from '../components/TaskListsSection'
 import CreateListDialog from '../components/CreateTaskListDialog'
 
 export default function Sidebar({ openSidebar, setOpenSidebar }) {
-  const theme = useTheme()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'))
-
   const SidebarContent = () => (
-    <Box
-      borderRight={'1px solid #e0e0e0'}
-      minWidth={200}
-      display={'flex'}
-      flexDirection={'column'}
-      justifyContent={'space`-between'}
-      height={'100%'}
-    >
-      <List>
+    <div className='flex h-full min-w-50 flex-col justify-between border-r-1 border-gray-200'>
+      <ul>
         <NavigationItems setOpenSidebar={setOpenSidebar} />
         <div className='w-full border-b-1 border-gray-300'></div>
         <TaskListSection setOpenSidebar={setOpenSidebar} />
-      </List>
-      <Box
-        padding={1}
-        display={'flex'}
-        alignContent={'center'}
-        justifyContent={'center'}
+      </ul>
+
+      <div
         onClick={e => e.stopPropagation()}
+        className='flex content-center justify-center p-1'
       >
         <CreateListDialog />
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 
-  if (isDesktop) {
-    return <SidebarContent />
-  }
   return (
     <Drawer
       open={openSidebar}
