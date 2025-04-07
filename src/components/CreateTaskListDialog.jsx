@@ -1,36 +1,31 @@
-import { Circle, EditNote, PlaylistAdd } from '@mui/icons-material'
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material'
+import { Dialog } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLists } from '../hooks/useLists'
 import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { COLORS } from '../constants/colors'
+import { ListPlus, Cog } from 'lucide-react'
 
 //TODO
 //[] apretar enter y mandar formulario
 //[] autofocus component
 
+//creo que lo de edit mode no es necesario, por defecto es id null, si le paso uno, actua en base
+// a ese id, sino esta en createMode
+
 export default function ListDialog({ mode = 'create', listId = null }) {
   const [isOpen, setIsOpen] = useState(false)
   const [listName, setListName] = useState('')
   const [color, setColor] = useState('primary')
-  const { createList, updateList, getListById, deleteList } = useLists()
-  const { setCurrentView } = useTaskView()
 
+  const { setCurrentView } = useTaskView()
+  const { createList, updateList, getListById, deleteList } = useLists()
+
+  //Could use listId to check if is onEditMode
   const isEditMode = mode === 'edit'
+
   useEffect(() => {
+    //Why isOpen is needed?
     if (isEditMode && isOpen && listId) {
       const list = getListById(listId)
       setListName(list.name)
@@ -45,6 +40,7 @@ export default function ListDialog({ mode = 'create', listId = null }) {
     setIsOpen(false)
   }
   const handleSubmit = () => {
+    //esta especie de catch se puede mejorar
     if (!listName.trim()) {
       handleClose()
       return
@@ -56,6 +52,7 @@ export default function ListDialog({ mode = 'create', listId = null }) {
       createList(listName, color)
     }
     handleClose()
+
     setListName('')
     setColor('primary')
   }
@@ -68,79 +65,75 @@ export default function ListDialog({ mode = 'create', listId = null }) {
 
   return (
     <>
-      <Button
-        variant='contained'
-        endIcon={isEditMode ? <EditNote /> : <PlaylistAdd />}
+      <button
+        className='flex rounded-lg border-1 bg-gray-200 p-2'
         onClick={handleOpen}
       >
-        {isEditMode ? 'Edit List' : 'Create List'}
-      </Button>
+        {!isEditMode && 'Create List'}
+        {isEditMode ?
+          <Cog />
+        : <ListPlus className='ml-2' />}
+      </button>
       <Dialog
         open={isOpen}
         onClose={handleClose}
       >
-        <DialogTitle> {isEditMode ? 'Edit List' : 'Create List'}</DialogTitle>
-        <DialogContent>
-          <TextField
-            fullWidth
-            label='List Name'
+        <div className='p-4 px-6'>
+          <h1 className='text-lg font-bold'>
+            {isEditMode ? 'Edit List' : 'Create List'}
+          </h1>
+          <input
+            className='rounded-md border-1 p-2'
+            type='text'
+            name=''
+            id=''
+            placeholder='List Name'
             value={listName}
-            margin='dense'
             onChange={e => setListName(e.target.value)}
-          ></TextField>
+          />
+          <label htmlFor='pet-select'>Choose a color:</label>
 
-          <FormControl
-            margin='dense'
-            fullWidth
+          <select
+            className='border-1'
+            name='color'
+            id='color-select'
+            onChange={e => setColor(e.target.value)}
           >
-            <InputLabel id='select-color'>Color</InputLabel>
-            <Select
-              labelId='select-color'
-              id='select-color'
-              value={color}
-              label='Color'
-              onChange={e => setColor(e.target.value)}
+            {COLORS.map(color => (
+              <option
+                key={color.value}
+                value={color.value}
+              >
+                {color.label}
+              </option>
+            ))}
+          </select>
+          <div>
+            {isEditMode && (
+              <button
+                type='button'
+                onClick={handleDelete}
+                className='border-1 border-red-600'
+              >
+                Delete
+              </button>
+            )}
+            <button
+              className='border-1'
+              onClick={handleClose}
+              type='button'
             >
-              {COLORS.map(color => (
-                <MenuItem
-                  key={color.value}
-                  value={color.value}
-                >
-                  <Box
-                    display={'flex'}
-                    gap={'1rem'}
-                  >
-                    <Circle color={color.value} />
-                    {color.label}
-                  </Box>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          {isEditMode && (
-            <Button
-              variant='outlined'
-              color='error'
-              onClick={handleDelete}
+              Cancel
+            </button>
+
+            <button
+              className='border-1'
+              onClick={handleSubmit}
             >
-              Delete
-            </Button>
-          )}
-          <Button
-            variant='outlined'
-            onClick={handleClose}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            variant='contained'
-          >
-            {isEditMode ? 'Save' : 'Create'}
-          </Button>
-        </DialogActions>
+              {isEditMode ? 'Save' : 'Create'}
+            </button>
+          </div>
+        </div>
       </Dialog>
     </>
   )
