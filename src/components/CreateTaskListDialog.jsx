@@ -1,4 +1,3 @@
-import { Dialog } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLists } from '../hooks/useLists'
 import { useTaskView } from '../hooks/useTaskView'
@@ -74,67 +73,74 @@ export default function ListDialog({ mode = 'create', listId = null }) {
           <Cog />
         : <ListPlus className='ml-2' />}
       </button>
-      <Dialog
-        open={isOpen}
-        onClose={handleClose}
-      >
-        <div className='p-4 px-6'>
-          <h1 className='text-lg font-bold'>
-            {isEditMode ? 'Edit List' : 'Create List'}
-          </h1>
-          <input
-            className='rounded-md border-1 p-2'
-            type='text'
-            name=''
-            id=''
-            placeholder='List Name'
-            value={listName}
-            onChange={e => setListName(e.target.value)}
-          />
-          <label htmlFor='pet-select'>Choose a color:</label>
-
-          <select
-            className='border-1'
-            name='color'
-            id='color-select'
-            onChange={e => setColor(e.target.value)}
-          >
-            {COLORS.map(color => (
-              <option
-                key={color.value}
-                value={color.value}
+      {isOpen && (
+        <div className='fixed inset-0 z-50 flex'>
+          <div
+            className='fixed inset-0 z-51 bg-black opacity-15'
+            onClick={handleClose}
+          ></div>
+          <div className='z-52 bg-white p-4 px-6'>
+            <div>
+              <h1 className='text-lg font-bold'>
+                {isEditMode ? 'Edit List' : 'Create List'}
+              </h1>
+            </div>
+            <div>
+              <input
+                className='rounded-md border-1 p-2'
+                type='text'
+                name=''
+                id=''
+                placeholder='List Name'
+                value={listName}
+                onChange={e => setListName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor='pet-select'>Choose a color:</label>
+              <select
+                className='border-1'
+                name='color'
+                id='color-select'
+                onChange={e => setColor(e.target.value)}
               >
-                {color.label}
-              </option>
-            ))}
-          </select>
-          <div>
-            {isEditMode && (
+                {COLORS.map(color => (
+                  <option
+                    key={color.value}
+                    value={color.value}
+                  >
+                    {color.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              {isEditMode && (
+                <button
+                  type='button'
+                  onClick={handleDelete}
+                  className='border-1 border-red-600'
+                >
+                  Delete
+                </button>
+              )}
               <button
+                className='border-1'
+                onClick={handleClose}
                 type='button'
-                onClick={handleDelete}
-                className='border-1 border-red-600'
               >
-                Delete
+                Cancel
               </button>
-            )}
-            <button
-              className='border-1'
-              onClick={handleClose}
-              type='button'
-            >
-              Cancel
-            </button>
-
-            <button
-              className='border-1'
-              onClick={handleSubmit}
-            >
-              {isEditMode ? 'Save' : 'Create'}
-            </button>
+              <button
+                className='border-1'
+                onClick={handleSubmit}
+              >
+                {isEditMode ? 'Save' : 'Create'}
+              </button>
+            </div>
           </div>
         </div>
-      </Dialog>
+      )}
     </>
   )
 }
