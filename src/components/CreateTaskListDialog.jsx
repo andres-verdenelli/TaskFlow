@@ -4,6 +4,7 @@ import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { COLORS } from '../constants/colors'
 import { ListPlus, Cog } from 'lucide-react'
+import Button from './Button'
 
 //TODO
 //[] apretar enter y mandar formulario
@@ -64,15 +65,12 @@ export default function ListDialog({ mode = 'create', listId = null }) {
 
   return (
     <>
-      <button
-        className='flex rounded-lg border-1 bg-gray-200 p-2'
-        onClick={handleOpen}
-      >
+      <Button onClick={handleOpen}>
         {!isEditMode && 'Create List'}
         {isEditMode ?
           <Cog />
         : <ListPlus className='ml-2' />}
-      </button>
+      </Button>
       {isOpen && (
         <div className='fixed inset-0 z-50 flex'>
           <div
