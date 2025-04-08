@@ -20,7 +20,6 @@ import { Add } from '@mui/icons-material'
 import { useTasks } from '../hooks/useTasks'
 import { useTaskView } from '../hooks/useTaskView'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import dayjs from 'dayjs'
 
 export function CreateTaskDialog() {
   const { currentView } = useTaskView()
@@ -28,7 +27,6 @@ export function CreateTaskDialog() {
 
   const [taskName, setTaskName] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const [dueDate, setDueDate] = useState(dayjs())
 
   const handleOpen = () => setIsOpen(true)
   const handleClose = () => setIsOpen(false)
