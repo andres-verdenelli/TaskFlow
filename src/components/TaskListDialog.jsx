@@ -13,7 +13,7 @@ import Button from './Button'
 //creo que lo de edit mode no es necesario, por defecto es id null, si le paso uno, actua en base
 // a ese id, sino esta en createMode
 
-export default function ListDialog({ mode = 'create', listId = null }) {
+export default function TaskListDialog({ mode = 'create', listId = null }) {
   const [isOpen, setIsOpen] = useState(false)
   const [listName, setListName] = useState('')
   const [color, setColor] = useState('primary')

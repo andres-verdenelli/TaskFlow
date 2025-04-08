@@ -1,6 +1,6 @@
 import NavigationItems from '../components/NavigationItems'
 import TaskListSection from '../components/TaskListsSection'
-import CreateListDialog from '../components/CreateTaskListDialog'
+import TaskListDialog from '../components/TaskListDialog'
 
 export default function Sidebar({ openSidebar, setOpenSidebar }) {
   return (
@@ -22,7 +22,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
               onClick={e => e.stopPropagation()}
               className='flex content-center justify-center p-1'
             >
-              <CreateListDialog />
+              <TaskListDialog />
             </div>
           </div>
         </div>

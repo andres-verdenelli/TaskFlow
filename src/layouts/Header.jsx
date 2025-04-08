@@ -1,7 +1,7 @@
 import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
-import CreateTaskListDialog from '../components/CreateTaskListDialog'
 import { Menu } from 'lucide-react'
+import TaskListDialog from '../components/TaskListDialog'
 
 export default function Header({ setOpenSidebar }) {
   const { getCurrentViewName, currentView } = useTaskView()
@@ -28,7 +28,7 @@ export default function Header({ setOpenSidebar }) {
                 onClick={() => setOpenSidebar(true)}
               >
                 {currentView.type === VIEW_TYPES.LIST && (
-                  <CreateTaskListDialog
+                  <TaskListDialog
                     mode='edit'
                     listId={currentView.listId}
                   />
