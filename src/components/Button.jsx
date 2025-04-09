@@ -4,7 +4,7 @@ export default function Button({
   className = '',
   ...props
 }) {
-  const baseClasses = 'rounded-lg border-1 px-4 py-2'
+  const baseClasses = 'rounded-lg border-1 px-3 py-1 font-light'
   const variantClasses = {
     primary: 'bg-neutral-800 text-white',
     secondary: 'bg-zinc-100  border-zinc-200',
