@@ -11,7 +11,7 @@ export function ListProvider({ children }) {
   }, [lists])
 
   // Actions
-  const createList = (name, color) => {
+  const createList = (name, color = null) => {
     const newList = {
       name,
       color,
