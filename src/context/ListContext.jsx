@@ -40,12 +40,18 @@ export function ListProvider({ children }) {
     return lists.find(list => list.id === id)
   }
 
+  const getListNameById = id => {
+    const list = getListById(id)
+    return list ? list.name : null
+  }
+
   const value = {
     lists,
     createList,
     deleteList,
     updateList,
     getListById,
+    getListNameById,
   }
 
   return <ListContext.Provider value={value}>{children}</ListContext.Provider>
