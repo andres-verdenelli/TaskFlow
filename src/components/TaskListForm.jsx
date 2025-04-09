@@ -3,7 +3,7 @@ import { useLists } from '../hooks/useLists'
 import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { COLORS } from '../constants/colors'
-import { Cog } from 'lucide-react'
+import { Cog, Trash } from 'lucide-react'
 import Button from './Button'
 
 //TODO
@@ -13,24 +13,33 @@ import Button from './Button'
 //creo que lo de edit mode no es necesario, por defecto es id null, si le paso uno, actua en base
 // a ese id, sino esta en createMode
 
-export default function TaskListForm({ setTaskListDialogOpen }) {
-  const [listName, setListName] = useState('')
+export default function TaskListForm({ setTaskListFormOpen, listId = null }) {
+  const isEditMode = listId !== null
+  const { setCurrentView } = useTaskView()
+  const { createList, updateList, getListById, deleteList, getListNameById } =
+    useLists()
+
+  const [listName, setListName] = useState(
+    isEditMode ? getListNameById(listId) : '',
+  )
   // const [color, setColor] = useState('blue')
 
-  const isEditMode = false
-
-  const { setCurrentView } = useTaskView()
-  const { createList, updateList, getListById, deleteList } = useLists()
-
   const handleClose = () => {
-    setTaskListDialogOpen(false)
+    setTaskListFormOpen(false)
   }
   const handleSubmit = () => {
-    createList(listName)
-    setTaskListDialogOpen(false)
+    if (isEditMode) {
+      updateList(listId, { name: listName })
+    } else {
+      createList(listName)
+    }
+    setTaskListFormOpen(false)
   }
 
-  const handleDelete = () => {}
+  const handleDelete = () => {
+    deleteList(listId)
+    handleClose()
+  }
 
   return (
     <>
@@ -40,12 +49,22 @@ export default function TaskListForm({ setTaskListDialogOpen }) {
       ></div>
       <div className='fixed top-1/2 left-1/2 z-52 -translate-x-1/2 -translate-y-1/2'>
         <div className='flex flex-col rounded-xl bg-white p-4 px-6'>
-          <div className='mb-4'>
-            <h1 className='text-lg font-bold'>
-              {isEditMode ? 'Edit List' : 'Create List'}
-            </h1>
+          <div className='mb-2 flex justify-between'>
+            <div className=''>
+              <h1 className='text-lg font-bold'>
+                {isEditMode ? 'Edit List' : 'Create List'}
+              </h1>
+            </div>
+            {isEditMode && (
+              <button
+                onClick={handleDelete}
+                className='rounded-md p-1 text-red-700 hover:bg-red-50'
+              >
+                <Trash />
+              </button>
+            )}
           </div>
-          <div>
+          <div className='mb-1'>
             <label
               htmlFor=''
               className='text-sm font-bold'
@@ -83,15 +102,6 @@ export default function TaskListForm({ setTaskListDialogOpen }) {
             </select>
           </div> */}
           <div className='flex justify-end gap-2'>
-            {isEditMode && (
-              <Button
-                type='button'
-                onClick={handleDelete}
-                className='border-1 border-red-600'
-              >
-                Delete
-              </Button>
-            )}
             <Button
               variant='outline'
               onClick={handleClose}
