@@ -3,7 +3,7 @@ import { useTaskView } from '../hooks/useTaskView'
 import { useLists } from '../hooks/useLists'
 import { Circle } from 'lucide-react'
 
-export default function TaskListSection({ setOpenSidebar }) {
+export default function TaskListSection({ setSidebarOpen }) {
   const { lists } = useLists()
   const { currentView, setCurrentView } = useTaskView()
 
@@ -15,7 +15,7 @@ export default function TaskListSection({ setOpenSidebar }) {
         className={`flex w-full cursor-pointer p-4 hover:bg-gray-100 ${isSelected && 'bg-gray-100'}`}
         onClick={() => {
           setCurrentView({ type: VIEW_TYPES.LIST, listId: list.id })
-          setOpenSidebar(false)
+          setSidebarOpen(false)
         }}
       >
         <div className='mr-2'>

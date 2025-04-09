@@ -1,19 +1,13 @@
-import Sidebar from './layouts/Sidebar'
 import Header from './layouts/Header'
 import MainContent from './layouts/MainContent'
-import { useState } from 'react'
 
 export default function App() {
-  const [openSidebar, setOpenSidebar] = useState(false)
-
   return (
     <div className='flex h-screen flex-col'>
-      <Header setOpenSidebar={setOpenSidebar} />
+      <Header />
+
+      {/* el main content deberia creer el mismo, no desde un div de afuera */}
       <div className='flex grow'>
-        <Sidebar
-          openSidebar={openSidebar}
-          setOpenSidebar={setOpenSidebar}
-        />
         <MainContent />
       </div>
     </div>

@@ -2,7 +2,7 @@ import { VIEW_TYPES } from '../constants/viewTypes'
 import { useTaskView } from '../hooks/useTaskView'
 import { LayoutDashboard, Calendar1, Clock, CircleCheckBig } from 'lucide-react'
 
-export default function NavigationItems({ setOpenSidebar }) {
+export default function NavigationItems({ setSidebarOpen }) {
   const ListItem = (text, Icon, viewType) => {
     const isSelected = currentView.type === viewType
 
@@ -11,7 +11,7 @@ export default function NavigationItems({ setOpenSidebar }) {
         className={`mb-2 flex w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 ${isSelected && 'bg-gray-100'}`}
         onClick={() => {
           setCurrentView({ type: viewType })
-          setOpenSidebar(false)
+          setSidebarOpen(false)
         }}
       >
         <div className='mr-2'>

@@ -1,10 +1,12 @@
-import { useTaskView } from '../hooks/useTaskView'
-import { VIEW_TYPES } from '../constants/viewTypes'
 import { Menu } from 'lucide-react'
-import TaskListDialog from '../components/TaskListDialog'
+import { useState } from 'react'
+import { useTaskView } from '../hooks/useTaskView'
+import Sidebar from './Sidebar'
 
-export default function Header({ setOpenSidebar }) {
-  const { getCurrentViewName, currentView } = useTaskView()
+export default function Header() {
+  const { getCurrentViewName } = useTaskView()
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <header>
@@ -12,7 +14,7 @@ export default function Header({ setOpenSidebar }) {
         <div className='flex items-center'>
           <button
             className='p-1'
-            onClick={() => setOpenSidebar(true)}
+            onClick={() => setSidebarOpen(true)}
           >
             <Menu />
           </button>
@@ -21,7 +23,7 @@ export default function Header({ setOpenSidebar }) {
           <span className='text-xl'>{getCurrentViewName()}</span>
         </div>
         <div className='flex items-center justify-end'>
-          <button
+          {/* <button
             className='p-1'
             onClick={() => setOpenSidebar(true)}
           >
@@ -31,9 +33,20 @@ export default function Header({ setOpenSidebar }) {
                 listId={currentView.listId}
               />
             )}
-          </button>
+          </button> */}
         </div>
       </div>
+      {isSidebarOpen && (
+        <>
+          <div
+            className='fixed inset-0 z-50 bg-black opacity-20'
+            onClick={() => setSidebarOpen(false)}
+          ></div>
+          <div className='fixed top-0 bottom-0 left-0 z-51 min-w-40 bg-white'>
+            <Sidebar setSidebarOpen={setSidebarOpen} />
+          </div>
+        </>
+      )}
     </header>
   )
 }
