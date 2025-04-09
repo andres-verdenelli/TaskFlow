@@ -18,16 +18,19 @@ export function ListProvider({ children }) {
       id: crypto.randomUUID(),
     }
     setLists(prev => [...prev, newList])
-    return newList
+    console.log('List Created')
+    console.log(newList)
   }
 
   const deleteList = id => {
+    console.log('List deleted')
+    console.log(getListById(id))
     setLists(prev => prev.filter(list => list.id !== id))
   }
 
   const updateList = (id, updates) => {
     setLists(prev =>
-      prev.map(list => (list.id === id ? { ...list, ...updates } : list))
+      prev.map(list => (list.id === id ? { ...list, ...updates } : list)),
     )
   }
 
