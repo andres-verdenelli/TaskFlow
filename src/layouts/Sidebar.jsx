@@ -3,7 +3,7 @@ import { VIEW_TYPES } from '../constants/viewTypes'
 import { useTaskView } from '../hooks/useTaskView'
 import { useLists } from '../hooks/useLists'
 import {
-  Circle,
+  CircleSmall,
   LayoutDashboard,
   Calendar1,
   Clock,
@@ -26,7 +26,7 @@ export default function Sidebar({ setSidebarOpen }) {
         }}
       >
         <div className='mr-2'>
-          <Circle />
+          <CircleSmall />
         </div>
         <div>
           <span>{list.name}</span>
@@ -73,7 +73,6 @@ export default function Sidebar({ setSidebarOpen }) {
           />
         ))}
       </ul>
-
       <div
         onClick={e => e.stopPropagation()}
         className='flex content-center justify-center p-1'
