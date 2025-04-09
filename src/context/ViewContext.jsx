@@ -7,12 +7,12 @@ export const ViewContext = createContext()
 
 export function ViewProvider({ children }) {
   const { getListById } = useLists()
+  const { getCompletedTasks, getTasksByListId, tasks } = useTasks()
 
   const [currentView, setCurrentView] = useState({
     type: VIEW_TYPES.ALL,
     listId: null,
   })
-  const { getCompletedTasks, getTasksByListId, tasks } = useTasks()
   const [visibleTasks, setVisibleTasks] = useState(tasks)
 
   const getCurrentViewName = () => {
