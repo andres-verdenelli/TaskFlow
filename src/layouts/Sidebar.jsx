@@ -18,7 +18,7 @@ import {
 export default function Sidebar({ setSidebarOpen }) {
   const { lists } = useLists()
   const { currentView, setCurrentView } = useTaskView()
-  const [isTaskListDialogOpen, setTaskListDialogOpen] = useState(false)
+  const [isTaskListFormOpen, setTaskListFormOpen] = useState(false)
 
   const ListItemButton = (text, Icon, isSelected, onClick) => {
     return (
@@ -78,14 +78,14 @@ export default function Sidebar({ setSidebarOpen }) {
       <div className='flex justify-center'>
         <Button
           onClick={() => {
-            setTaskListDialogOpen(true)
+            setTaskListFormOpen(true)
           }}
         >
           Create List
           <ListPlus className='ml-2' />
         </Button>
-        {isTaskListDialogOpen && (
-          <TaskListForm setTaskListDialogOpen={setTaskListDialogOpen} />
+        {isTaskListFormOpen && (
+          <TaskListForm setTaskListFormOpen={setTaskListFormOpen} />
         )}
       </div>
     </div>
