@@ -32,9 +32,9 @@ export default function Task({ task }) {
         >
           <Trash2 />
         </div>
-        <div className='text-gray-400 hover:text-black'>
+        {/* <div className='text-gray-400 hover:text-black'>
           <PenLine />
-        </div>
+        </div> */}
       </li>
     </>
   )
