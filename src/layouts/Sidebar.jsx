@@ -1,13 +1,16 @@
-import TaskListDialog from '../components/TaskListDialog'
-import { VIEW_TYPES } from '../constants/viewTypes'
-import { useTaskView } from '../hooks/useTaskView'
+import { useState } from 'react'
+import Button from '../components/Button'
+import TaskListForm from '../components/TaskListForm'
 import { useLists } from '../hooks/useLists'
+import { useTaskView } from '../hooks/useTaskView'
+import { VIEW_TYPES } from '../constants/viewTypes'
 import {
   CircleSmall,
   LayoutDashboard,
   Calendar1,
   Clock,
   CircleCheckBig,
+  ListPlus,
 } from 'lucide-react'
 
 //falta transicion al abrir
@@ -15,6 +18,7 @@ import {
 export default function Sidebar({ setSidebarOpen }) {
   const { lists } = useLists()
   const { currentView, setCurrentView } = useTaskView()
+  const [isTaskListDialogOpen, setTaskListDialogOpen] = useState(false)
 
   const ListItemButton = (text, Icon, isSelected, onClick) => {
     return (
@@ -71,12 +75,18 @@ export default function Sidebar({ setSidebarOpen }) {
         ))}
       </ul>
 
-      {/* falta editar es TaskListDialog */}
-      <div
-        onClick={e => e.stopPropagation()}
-        className='flex content-center justify-center p-1'
-      >
-        <TaskListDialog />
+      <div className='flex justify-center'>
+        <Button
+          onClick={() => {
+            setTaskListDialogOpen(true)
+          }}
+        >
+          Create List
+          <ListPlus className='ml-2' />
+        </Button>
+        {isTaskListDialogOpen && (
+          <TaskListForm setTaskListDialogOpen={setTaskListDialogOpen} />
+        )}
       </div>
     </div>
   )
