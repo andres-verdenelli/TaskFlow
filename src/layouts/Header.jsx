@@ -1,19 +1,21 @@
-import { Menu } from 'lucide-react'
+import { Cog, Menu } from 'lucide-react'
 import { useState } from 'react'
 import { useTaskView } from '../hooks/useTaskView'
 import Sidebar from './Sidebar'
+import { VIEW_TYPES } from '../constants/viewTypes'
+import TaskListForm from '../components/TaskListForm'
 
 export default function Header() {
-  const { getCurrentViewName } = useTaskView()
-
   const [isSidebarOpen, setSidebarOpen] = useState(false)
+  const [isTaskListFormOpen, setTaskListFormOpen] = useState(false)
+  const { getCurrentViewName, currentView } = useTaskView()
 
   return (
     <header>
       <div className='grid grid-cols-3 border-b-1 border-b-gray-300 p-4'>
         <div className='flex items-center'>
           <button
-            className='p-1'
+            className='rounded-md p-1 hover:bg-zinc-100'
             onClick={() => setSidebarOpen(true)}
           >
             <Menu />
@@ -23,17 +25,20 @@ export default function Header() {
           <span className='text-xl'>{getCurrentViewName()}</span>
         </div>
         <div className='flex items-center justify-end'>
-          {/* <button
-            className='p-1'
-            onClick={() => setOpenSidebar(true)}
-          >
-            {currentView.type === VIEW_TYPES.LIST && (
-              <TaskListDialog
-                mode='edit'
-                listId={currentView.listId}
-              />
-            )}
-          </button> */}
+          {currentView.type === VIEW_TYPES.LIST && (
+            <button
+              className='rounded-md p-1 hover:bg-zinc-100'
+              onClick={() => setTaskListFormOpen(true)}
+            >
+              <Cog />
+            </button>
+          )}
+          {isTaskListFormOpen && (
+            <TaskListForm
+              setTaskListFormOpen={setTaskListFormOpen}
+              listId={currentView.listId}
+            />
+          )}
         </div>
       </div>
       {isSidebarOpen && (
