@@ -10,6 +10,8 @@ import {
   CircleCheckBig,
 } from 'lucide-react'
 
+//falta transicion al abrir
+
 export default function Sidebar({ setSidebarOpen }) {
   const { lists } = useLists()
   const { currentView, setCurrentView } = useTaskView()
@@ -68,6 +70,8 @@ export default function Sidebar({ setSidebarOpen }) {
           />
         ))}
       </ul>
+
+      {/* falta editar es TaskListDialog */}
       <div
         onClick={e => e.stopPropagation()}
         className='flex content-center justify-center p-1'
