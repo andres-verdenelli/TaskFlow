@@ -7,14 +7,14 @@ export default function MainContent() {
 
   return (
     <div className='grow'>
-      <li>
+      <ul>
         {visibleTasks.map(task => (
           <Task
             task={task}
             key={task.id}
           />
         ))}
-      </li>
+      </ul>
       <CreateTaskDialog />
     </div>
   )

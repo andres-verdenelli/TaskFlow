@@ -12,7 +12,7 @@ export default function Task({ task }) {
   }
   return (
     <>
-      <div className='flex items-center p-4'>
+      <li className='flex items-center p-4'>
         <div
           className='p-4'
           onClick={toggleCheck}
@@ -38,7 +38,7 @@ export default function Task({ task }) {
         <div className='text-gray-400 hover:text-black'>
           <PenLine />
         </div>
-      </div>
+      </li>
     </>
   )
 }
