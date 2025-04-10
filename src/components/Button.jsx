@@ -2,7 +2,7 @@ export default function Button({
   children,
   variant = 'primary',
   className = '',
-  props,
+  ...rest
 }) {
   const baseClasses = 'rounded-lg border-1 px-3 py-1 font-light'
   const variantClasses = {
@@ -17,7 +17,7 @@ export default function Button({
   return (
     <button
       className={buttonClasses}
-      {...props}
+      {...rest}
     >
       <div className='flex items-center justify-center'>{children}</div>
     </button>
