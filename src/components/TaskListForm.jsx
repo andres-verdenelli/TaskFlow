@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import { useLists } from '../hooks/useLists'
-import { useTaskView } from '../hooks/useTaskView'
-import { VIEW_TYPES } from '../constants/viewTypes'
-import { COLORS } from '../constants/colors'
-import { Cog, Trash } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import Button from './Button'
 
 //TODO
@@ -15,30 +12,28 @@ import Button from './Button'
 
 export default function TaskListForm({ setTaskListFormOpen, listId = null }) {
   const isEditMode = listId !== null
-  const { setCurrentView } = useTaskView()
-  const { createList, updateList, getListById, deleteList, getListNameById } =
-    useLists()
+  const { createList, updateList, deleteList, getListNameById } = useLists()
 
   const [listName, setListName] = useState(
     isEditMode ? getListNameById(listId) : '',
   )
-  // const [color, setColor] = useState('blue')
 
-  const handleClose = () => {
-    setTaskListFormOpen(false)
-  }
   const handleSubmit = () => {
     if (isEditMode) {
       updateList(listId, { name: listName })
     } else {
       createList(listName)
     }
-    setTaskListFormOpen(false)
+    handleClose()
   }
 
   const handleDelete = () => {
     deleteList(listId)
     handleClose()
+  }
+
+  const handleClose = () => {
+    setTaskListFormOpen(false)
   }
 
   return (
