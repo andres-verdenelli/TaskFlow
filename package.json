@@ -12,9 +12,6 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.2",
-    "@mui/material": "^6.4.5",
-    "@mui/x-date-pickers": "^7.27.0",
     "@tailwindcss/vite": "^4.1.0",
     "dayjs": "^1.11.13",
     "lucide-react": "^0.486.0",
