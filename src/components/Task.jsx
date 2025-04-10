@@ -1,5 +1,5 @@
 import { useTasks } from '../hooks/useTasks'
-import { Trash2, PenLine, CircleCheck, Circle } from 'lucide-react'
+import { Trash2, CircleCheck, Circle } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Task({ task }) {
