@@ -9,7 +9,10 @@ export function TodoProvider({ children }) {
   useEffect(() => {
     StorageService.set('lists', lists)
   }, [lists])
-
+  /**
+   * Creates a new list
+   * @param {string} name - The name for the new list
+   */
   const createList = name => {
     const newList = {
       name,
@@ -18,24 +21,42 @@ export function TodoProvider({ children }) {
     }
     setLists(prev => [...prev, newList])
   }
-
+  /**
+   * Returns a list object by its ID
+   * @param {string} id - The ID for the list
+   * @returns {Object | null} - Return a object list or null if not found
+   */
   const getList = id => lists.find(list => list.id === id)
-
+  /**
+   * Returns the name of a list by its ID
+   * @param {string} id - The ID of the list
+   * @returns {string | null } - Return the list name or null if not found
+   */
   const getListName = id => {
-    const filterList = lists.find(list => list.id === id)
-    return filterList ? filterList.name : null
+    return lists.find(list => list.id === id)?.name || null
   }
-
+  /**
+   * Renames a list by its ID
+   * @param {string} id - The ID of the list
+   * @param {string} newName - The new name for the list
+   */
   const renameList = (id, newName) => {
     setLists(prev =>
       prev.map(list => (list.id === id ? { ...list, name: newName } : list)),
     )
   }
-
+  /**
+   * Deletes a list by its ID
+   * @param {string} id - The ID of the list to delete
+   */
   const deleteList = id => {
     setLists(prev => prev.filter(list => list.id !== id))
   }
-
+  /**
+   * Creates a new task inside a list
+   * @param {string} name - The name for the task
+   * @param {string} listId - The ID of the list to add the task
+   */
   const createTask = (name, listId) => {
     const newTask = {
       name,
@@ -59,7 +80,7 @@ export function TodoProvider({ children }) {
     return lists.reduce((acc, list) => [...acc, ...list.tasks], [])
   }
   /**
-   * Returns a task based on its ID.
+   * Returns a task by its ID
    * @param {string} id - The ID of the task.
    * @returns {Object | null} The found task, or null if not found.
    */
@@ -68,6 +89,11 @@ export function TodoProvider({ children }) {
     return allTasks.find(task => task.id == id) || null
   }
 
+  /**
+   * Renames a task by its ID
+   * @param {string} newName - The new name for a task
+   * @param {string} id - The ID of the task
+   */
   const renameTask = (newName, id) => {
     setLists(prev =>
       prev.map(list => ({
@@ -78,11 +104,16 @@ export function TodoProvider({ children }) {
       })),
     )
   }
-
-  //grave error
+  /**
+   * Deletes a task by its ID
+   * @param {string} id - The ID of the task to delete
+   */
   const deleteTask = id => {
     setLists(prev =>
-      prev.map(list => list.tasks.filter(task => task.id !== id)),
+      prev.map(list => ({
+        ...list,
+        tasks: list.tasks.filter(task => task.id !== id),
+      })),
     )
   }
 
@@ -97,6 +128,7 @@ export function TodoProvider({ children }) {
     deleteTask,
     getTask,
     getAllTasks,
+    renameTask,
   }
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>
