@@ -192,6 +192,7 @@ export function TodoProvider({ children }) {
     toggleTaskCompletion,
     setTaskCompletion,
     isTaskCompleted,
+    getTasks,
   }
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>
