@@ -9,6 +9,7 @@ export function TodoProvider({ children }) {
   useEffect(() => {
     StorageService.set('lists', lists)
   }, [lists])
+
   /**
    * Creates a new list
    * @param {string} name - The name for the new list
@@ -21,20 +22,23 @@ export function TodoProvider({ children }) {
     }
     setLists(prev => [...prev, newList])
   }
+
   /**
    * Returns a list object by its ID
    * @param {string} id - The ID for the list
    * @returns {Object | null} - Return a object list or null if not found
    */
   const getList = id => lists.find(list => list.id === id)
+
   /**
    * Returns the name of a list by its ID
    * @param {string} id - The ID of the list
    * @returns {string | null } - Return the list name or null if not found
    */
   const getListName = id => {
-    return lists.find(list => list.id === id)?.name || null
+    return getList(id)?.name || null
   }
+
   /**
    * Renames a list by its ID
    * @param {string} id - The ID of the list
@@ -45,6 +49,7 @@ export function TodoProvider({ children }) {
       prev.map(list => (list.id === id ? { ...list, name: newName } : list)),
     )
   }
+
   /**
    * Deletes a list by its ID
    * @param {string} id - The ID of the list to delete
@@ -52,6 +57,7 @@ export function TodoProvider({ children }) {
   const deleteList = id => {
     setLists(prev => prev.filter(list => list.id !== id))
   }
+
   /**
    * Creates a new task inside a list
    * @param {string} name - The name for the task
@@ -72,6 +78,7 @@ export function TodoProvider({ children }) {
       ),
     )
   }
+
   /**
    * Returns all tasks from all lists.
    * @returns {Array} An array containing all tasks.
@@ -79,6 +86,7 @@ export function TodoProvider({ children }) {
   const getAllTasks = () => {
     return lists.reduce((acc, list) => [...acc, ...list.tasks], [])
   }
+
   /**
    * Returns a task by its ID
    * @param {string} id - The ID of the task.
@@ -90,20 +98,64 @@ export function TodoProvider({ children }) {
   }
 
   /**
-   * Renames a task by its ID
-   * @param {string} newName - The new name for a task
-   * @param {string} id - The ID of the task
+   * Returns the completion status of a task by its ID.
+   * @param {string} id - The ID of the task.
+   * @returns {boolean|undefined} True if completed, false if not, or undefined if task not found.
    */
-  const renameTask = (newName, id) => {
+  const isTaskCompleted = id => getTask(id)?.isCompleted || null
+
+  /**
+   * Updates properties of a task by its ID.
+   * Used internally by other task-related operations (e.g., rename, toggle completion).
+   *
+   * @param {string} id - The ID of the task to update.
+   * @param {Object} update - An object containing the properties to update.
+   */
+  const updateTask = (id, update) => {
     setLists(prev =>
       prev.map(list => ({
         ...list,
         tasks: list.tasks.map(task =>
-          task.id === id ? { ...task, name: newName } : task,
+          task.id === id ? { ...task, ...update } : task,
         ),
       })),
     )
   }
+
+  /**
+   * Renames a task by its ID
+   * @param {string} newName - The new name for a task
+   * @param {string} id - The ID of the task
+   */
+  const renameTask = (id, name) => {
+    updateTask(id, { name })
+    // setLists(prev =>
+    //   prev.map(list => ({
+    //     ...list,
+    //     tasks: list.tasks.map(task =>
+    //       task.id === id ? { ...task, name: newName } : task,
+    //     ),
+    //   })),
+    // )
+  }
+
+  /**
+   * Toggles the completion status of a task.
+   * If the task is completed, it will be marked as incomplete and vice versa.
+   * @param {string} id - The ID of the task.
+   */
+  const toggleTaskCompletion = id => {
+    const isCompleted = isTaskCompleted(id)
+    updateTask(id, { isCompleted: !isCompleted })
+  }
+
+  /**
+   * Sets the completion status of a task.
+   * @param {string} id - The ID of the task.
+   * @param {boolean} isCompleted - The desired completion status.
+   */
+  const setTaskCompletion = (id, isCompleted) =>
+    updateTask(id, { isCompleted: isCompleted })
   /**
    * Deletes a task by its ID
    * @param {string} id - The ID of the task to delete
@@ -129,6 +181,9 @@ export function TodoProvider({ children }) {
     getTask,
     getAllTasks,
     renameTask,
+    toggleTaskCompletion,
+    setTaskCompletion,
+    isTaskCompleted,
   }
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>
