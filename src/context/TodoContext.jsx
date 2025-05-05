@@ -98,11 +98,18 @@ export function TodoProvider({ children }) {
   }
 
   /**
+   * Returns all tasks belonging to a specific list.
+   * @param {string} listId - The ID of the list.
+   * @returns {Array} An array of task objects belonging to the specified list.
+   */
+  const getTasks = listId => getList(listId)?.tasks || null
+
+  /**
    * Returns the completion status of a task by its ID.
    * @param {string} id - The ID of the task.
    * @returns {boolean|undefined} True if completed, false if not, or undefined if task not found.
    */
-  const isTaskCompleted = id => getTask(id)?.isCompleted || null
+  const isTaskCompleted = id => getTask(id)?.isCompleted || []
 
   /**
    * Updates properties of a task by its ID.
@@ -156,6 +163,7 @@ export function TodoProvider({ children }) {
    */
   const setTaskCompletion = (id, isCompleted) =>
     updateTask(id, { isCompleted: isCompleted })
+
   /**
    * Deletes a task by its ID
    * @param {string} id - The ID of the task to delete
