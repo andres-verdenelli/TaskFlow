@@ -1,16 +1,29 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import { useTodo } from '../hooks/useTodo'
 
 export const ViewContext = createContext()
 
 export function ViewProvider({ children }) {
-  const { getAllTasks, getAllCompletedTasks, getTasks, getListName } = useTodo()
+  const { getAllTasks, getAllCompletedTasks, getTasks, getListName, lists } =
+    useTodo()
 
   const [currentView, setCurrentView] = useState({
     type: VIEW_TYPES.ALL,
     listId: null,
   })
+
+  useEffect(() => {
+    if (
+      currentView.type === VIEW_TYPES.LIST &&
+      !lists.some(list => list.id === currentView.listId)
+    ) {
+      setCurrentView({
+        type: VIEW_TYPES.ALL,
+        listId: null,
+      })
+    }
+  }, [lists, currentView])
 
   //TODO falta today y schedule
   const getVisibleTasks = () => {
@@ -20,7 +33,7 @@ export function ViewProvider({ children }) {
       case VIEW_TYPES.DONE:
         return getAllCompletedTasks()
       case VIEW_TYPES.LIST:
-        return getTasks(currentView.listId)
+        return getTasks(currentView.listId) || []
     }
   }
 

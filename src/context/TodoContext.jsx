@@ -3,19 +3,20 @@ import { StorageService } from '../services/storage'
 
 export const TodoContext = createContext(null)
 
-const defaultLists = [
-  {
-    name: 'Default List',
-    id: crypto.randomUUID(),
-    tasks: [],
-  },
-]
+// const defaultLists = [
+//   {
+//     name: 'Default List',
+//     id: crypto.randomUUID(),
+//     tasks: [],
+//   },
+// ]
 export function TodoProvider({ children }) {
-  const [lists, setLists] = useState(
-    () => StorageService.get('lists') || defaultLists,
-  )
+  const [lists, setLists] = useState(() => StorageService.get('lists') || [])
 
   useEffect(() => {
+    if (lists.length === 0) {
+      createList('Default List')
+    }
     StorageService.set('lists', lists)
   }, [lists])
 
@@ -118,7 +119,7 @@ export function TodoProvider({ children }) {
    * @param {string} id - The ID of the task.
    * @returns {boolean|undefined} True if completed, false if not, or undefined if task not found.
    */
-  const isTaskCompleted = id => getTask(id)?.isCompleted || []
+  const isTaskCompleted = id => getTask(id)?.isCompleted
 
   /**
    * Updates properties of a task by its ID.

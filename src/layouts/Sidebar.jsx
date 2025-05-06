@@ -63,8 +63,8 @@ export default function Sidebar({ setSidebarOpen }) {
     <div className='flex h-full min-w-50 flex-col justify-between border-r-1 border-gray-200 bg-white p-4'>
       <ul className='flex flex-col gap-2'>
         {ListItem('All', LayoutDashboard, VIEW_TYPES.ALL)}
-        {ListItem('Today', Calendar1, VIEW_TYPES.TODAY)}
-        {ListItem('Scheduled', Clock, VIEW_TYPES.SCHEDULE)}
+        {/* {ListItem('Today', Calendar1, VIEW_TYPES.TODAY)} */}
+        {/* {ListItem('Scheduled', Clock, VIEW_TYPES.SCHEDULE)} */}
         {ListItem('Done', CircleCheckBig, VIEW_TYPES.DONE)}
         <div className='w-full border-b-1 border-gray-300'></div>
         {lists.map(list => (
