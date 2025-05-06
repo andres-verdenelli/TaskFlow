@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useLists } from './useLists'
 import { Trash } from 'lucide-react'
-import Button from './Button'
-import { useTodo } from '../hooks/useTodo'
+import Button from '../components/Button'
 
 //TODO
 //[] apretar enter y mandar formulario
@@ -12,15 +12,15 @@ import { useTodo } from '../hooks/useTodo'
 
 export default function TaskListForm({ setTaskListFormOpen, listId = null }) {
   const isEditMode = listId !== null
-  const { createList, deleteList, getListName, renameList } = useTodo()
+  const { createList, updateList, deleteList, getListNameById } = useLists()
 
   const [listName, setListName] = useState(
-    isEditMode ? getListName(listId) : '',
+    isEditMode ? getListNameById(listId) : '',
   )
 
   const handleSubmit = () => {
     if (isEditMode) {
-      renameList(listId, listName)
+      updateList(listId, { name: listName })
     } else {
       createList(listName)
     }

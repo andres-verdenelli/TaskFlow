@@ -3,8 +3,17 @@ import { StorageService } from '../services/storage'
 
 export const TodoContext = createContext(null)
 
+const defaultLists = [
+  {
+    name: 'Default List',
+    id: crypto.randomUUID(),
+    tasks: [],
+  },
+]
 export function TodoProvider({ children }) {
-  const [lists, setLists] = useState(() => StorageService.get('lists') || [])
+  const [lists, setLists] = useState(
+    () => StorageService.get('lists') || defaultLists,
+  )
 
   useEffect(() => {
     StorageService.set('lists', lists)
@@ -84,7 +93,7 @@ export function TodoProvider({ children }) {
    * @returns {Array} An array containing all tasks.
    */
   const getAllTasks = () => {
-    return lists.reduce((acc, list) => [...acc, ...list.tasks], [])
+    return lists.reduce((acc, list) => [...acc, ...list.tasks], [] || [])
   }
 
   /**
@@ -177,6 +186,13 @@ export function TodoProvider({ children }) {
     )
   }
 
+  /**
+   * Returns all tasks marked as completed from all lists.
+   * @returns {Array} An array of completed task objects.
+   */
+  const getAllCompletedTasks = () =>
+    getAllTasks().filter(task => task.isCompleted === true)
+
   const value = {
     lists,
     createList,
@@ -193,6 +209,7 @@ export function TodoProvider({ children }) {
     setTaskCompletion,
     isTaskCompleted,
     getTasks,
+    getAllCompletedTasks,
   }
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>

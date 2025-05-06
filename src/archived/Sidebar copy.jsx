@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../components/Button'
 import TaskListForm from '../components/TaskListForm'
+import { useLists } from './useLists'
 import { useTaskView } from '../hooks/useTaskView'
 import { VIEW_TYPES } from '../constants/viewTypes'
 import {
@@ -11,12 +12,11 @@ import {
   CircleCheckBig,
   ListPlus,
 } from 'lucide-react'
-import { useTodo } from '../hooks/useTodo'
 
-//TODO transicion al abrir
+//falta transicion al abrir
 
 export default function Sidebar({ setSidebarOpen }) {
-  const { lists } = useTodo()
+  const { lists } = useLists()
   const { currentView, setCurrentView } = useTaskView()
   const [isTaskListFormOpen, setTaskListFormOpen] = useState(false)
 

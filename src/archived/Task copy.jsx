@@ -1,15 +1,20 @@
+import { useTasks } from './useTasks'
 import { Trash2, CircleCheck, Circle } from 'lucide-react'
-import { useTodo } from '../hooks/useTodo'
+import { useState } from 'react'
 
 export default function Task({ task }) {
-  const { deleteTask, renameTask, toggleTaskCompletion, isTaskCompleted } =
-    useTodo()
+  const { deleteTask, renameTask, checkTask } = useTasks()
+  const [isChecked, setIsChecked] = useState(task.isDone)
 
+  const toggleCheck = () => {
+    setIsChecked(prev => !prev)
+    checkTask(task.id)
+  }
   return (
     <>
       <li className='flex items-center gap-2 p-6'>
-        <div onClick={() => toggleTaskCompletion(task.id)}>
-          {isTaskCompleted(task.id) ?
+        <div onClick={toggleCheck}>
+          {isChecked ?
             <CircleCheck />
           : <Circle />}
         </div>
@@ -27,6 +32,9 @@ export default function Task({ task }) {
         >
           <Trash2 />
         </div>
+        {/* <div className='text-gray-400 hover:text-black'>
+          <PenLine />
+        </div> */}
       </li>
     </>
   )

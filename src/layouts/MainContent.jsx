@@ -5,13 +5,13 @@ import { TaskForm } from '../components/TaskForm'
 import { Plus } from 'lucide-react'
 
 export default function MainContent() {
-  const { visibleTasks } = useTaskView()
+  const { getVisibleTasks } = useTaskView()
   const [isTaskFormOpen, setTaskFormOpen] = useState(false)
 
   return (
     <div className='grow'>
       <ul>
-        {visibleTasks.map(task => (
+        {getVisibleTasks().map(task => (
           <Task
             task={task}
             key={task.id}

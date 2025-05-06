@@ -1,22 +1,24 @@
 import { useState } from 'react'
+import { useTasks } from './useTasks'
 import { useTaskView } from '../hooks/useTaskView'
-import Button from './Button'
-import InputText from './InputText'
-import Label from './Label'
-import Select from './Select'
+import Button from '../components/Button'
+import InputText from '../components/InputText'
+import Label from '../components/Label'
+import Select from '../components/Select'
+import { useLists } from './useLists'
 import { VIEW_TYPES } from '../constants/viewTypes'
-import { useTodo } from '../hooks/useTodo'
 
 //al apretar enter se manda el formulario pero no agrega la task
 //autofocus inputtext
 
 export function TaskForm({ setTaskFormOpen }) {
   const { currentView } = useTaskView()
-  const { createTask, lists } = useTodo()
+  const { createTask } = useTasks()
+  const { lists } = useLists()
 
   const [taskName, setTaskName] = useState('')
   const [taskListId, setTaskListId] = useState(
-    currentView.type === VIEW_TYPES.LIST ? currentView.listId : lists[0]?.id,
+    currentView.type === VIEW_TYPES.LIST ? currentView.listId : lists[0].id,
   )
 
   const handleClose = () => setTaskFormOpen(false)

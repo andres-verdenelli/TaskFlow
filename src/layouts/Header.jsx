@@ -1,8 +1,8 @@
 import { Cog, Menu } from 'lucide-react'
 import { useState } from 'react'
 import { useTaskView } from '../hooks/useTaskView'
-import Sidebar from './Sidebar'
 import { VIEW_TYPES } from '../constants/viewTypes'
+import Sidebar from './Sidebar'
 import TaskListForm from '../components/TaskListForm'
 
 export default function Header() {
