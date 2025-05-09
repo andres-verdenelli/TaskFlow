@@ -48,6 +48,7 @@ export function TaskForm({ setTaskFormOpen }) {
                 name='task-name-input'
                 id='task-name-input'
                 value={taskName}
+                autoComplete='off'
                 onChange={e => setTaskName(e.target.value)}
                 required
               />

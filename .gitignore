@@ -25,3 +25,4 @@ tickets
 *.sw?
 *.png
 todo.txt
+.cursorignore

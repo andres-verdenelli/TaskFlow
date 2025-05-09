@@ -33,7 +33,7 @@ export function ViewProvider({ children }) {
       case VIEW_TYPES.DONE:
         return getAllCompletedTasks()
       case VIEW_TYPES.LIST:
-        return getTasks(currentView.listId) || []
+        return getTasks(currentView.listId)
     }
   }
 

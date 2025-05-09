@@ -73,6 +73,7 @@ export default function TaskListForm({ setTaskListFormOpen, listId = null }) {
               type='text'
               name=''
               id=''
+              autoComplete='off'
               placeholder='List Name'
               value={listName}
               onChange={e => setListName(e.target.value)}

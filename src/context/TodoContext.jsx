@@ -38,7 +38,7 @@ export function TodoProvider({ children }) {
    * @param {string} id - The ID for the list
    * @returns {Object | null} - Return a object list or null if not found
    */
-  const getList = id => lists.find(list => list.id === id)
+  const getList = id => lists.find(list => list.id === id) || null
 
   /**
    * Returns the name of a list by its ID
@@ -112,7 +112,7 @@ export function TodoProvider({ children }) {
    * @param {string} listId - The ID of the list.
    * @returns {Array} An array of task objects belonging to the specified list.
    */
-  const getTasks = listId => getList(listId)?.tasks || null
+  const getTasks = listId => getList(listId)?.tasks || []
 
   /**
    * Returns the completion status of a task by its ID.
@@ -192,7 +192,7 @@ export function TodoProvider({ children }) {
    * @returns {Array} An array of completed task objects.
    */
   const getAllCompletedTasks = () =>
-    getAllTasks().filter(task => task.isCompleted === true)
+    getAllTasks().filter(task => task.isCompleted === true) || []
 
   const value = {
     lists,

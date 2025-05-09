@@ -11,6 +11,11 @@ export default function MainContent() {
   return (
     <div className='grow'>
       <ul>
+        {getVisibleTasks().length === 0 && (
+          <li className='mt-4 flex items-center justify-center text-gray-500'>
+            This list has no tasks yet
+          </li>
+        )}
         {getVisibleTasks().map(task => (
           <Task
             task={task}
